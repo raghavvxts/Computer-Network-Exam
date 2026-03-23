@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CN Numericals — Complete Practice Set</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0d11;
+  --card: #111318;
+  --card2: #181c24;
+  --border: #232834;
+  --border2: #2e3545;
+  --text: #dde2ee;
+  --muted: #7a839a;
+  --dim: #4a5168;
+  --c1: #60a5fa; /* blue */
+  --c2: #a78bfa; /* purple */
+  --c3: #34d399; /* green */
+  --c4: #fbbf24; /* amber */
+  --c5: #f87171; /* red */
+  --c6: #38bdf8; /* sky */
+  --c7: #fb923c; /* orange */
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Sora', sans-serif; font-size: 14px; line-height: 1.7; }
+
+/* ── Header ── */
+.site-header {
+  padding: 36px 28px 28px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(160deg, #0d1018 0%, #0b1120 100%);
+  position: relative; overflow: hidden;
+}
+.site-header::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 70% 50%, rgba(96,165,250,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.label-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px; margin-bottom: 14px;
+  background: rgba(96,165,250,0.1); border: 1px solid rgba(96,165,250,0.2); color: var(--c1);
+}
+.label-chip::before { content: '◆'; font-size: 6px; }
+h1 { font-family: 'Sora', sans-serif; font-size: clamp(22px,3.5vw,32px); font-weight: 600; color: #fff; line-height: 1.2; }
+h1 span { color: var(--c1); }
+.header-sub { color: var(--muted); font-size: 13px; margin-top: 8px; }
+.topic-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.pill {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  padding: 4px 10px; border-radius: 4px; letter-spacing: 0.04em;
+  border: 1px solid; cursor: pointer; transition: all 0.15s;
+}
+.pill:hover { opacity: 0.8; transform: translateY(-1px); }
+.pill-b { color: var(--c1); border-color: rgba(96,165,250,0.3); background: rgba(96,165,250,0.07); }
+.pill-p { color: var(--c2); border-color: rgba(167,139,250,0.3); background: rgba(167,139,250,0.07); }
+.pill-g { color: var(--c3); border-color: rgba(52,211,153,0.3); background: rgba(52,211,153,0.07); }
+.pill-a { color: var(--c4); border-color: rgba(251,191,36,0.3); background: rgba(251,191,36,0.07); }
+.pill-r { color: var(--c5); border-color: rgba(248,113,113,0.3); background: rgba(248,113,113,0.07); }
+.pill-s { color: var(--c6); border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.07); }
+.pill-o { color: var(--c7); border-color: rgba(251,146,60,0.3); background: rgba(251,146,60,0.07); }
+
+/* ── Layout ── */
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 20px 60px; }
+
+/* ── Topic block ── */
+.topic-block { margin: 32px 0 0; }
+.topic-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 18px;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid var(--border);
+  border-bottom: none;
+}
+.topic-icon { font-size: 16px; width: 28px; text-align: center; }
+.topic-title { font-size: 14px; font-weight: 600; color: #fff; flex: 1; }
+.topic-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+
+/* ── Problem card ── */
+.prob-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: none;
+  padding: 0;
+  overflow: hidden;
+}
+.prob-card + .prob-card { border-top: 1px solid var(--border); }
+.prob-card:last-child { border-radius: 0 0 10px 10px; }
+
+.prob-head {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 14px 18px 12px;
+  cursor: pointer; user-select: none;
+  transition: background 0.1s;
+}
+.prob-head:hover { background: rgba(255,255,255,0.015); }
+.prob-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  min-width: 24px; color: var(--dim); margin-top: 2px;
+}
+.prob-q { font-size: 13.5px; color: var(--text); flex: 1; line-height: 1.55; }
+.prob-q strong { color: #fff; font-weight: 500; }
+.prob-badge {
+  font-family: 'JetBrains Mono', monospace; font-size: 9px;
+  padding: 2px 7px; border-radius: 3px; white-space: nowrap; margin-top: 2px;
+  letter-spacing: 0.05em;
+}
+.badge-solved { background: rgba(52,211,153,0.1); color: var(--c3); border: 1px solid rgba(52,211,153,0.2); }
+.badge-concept { background: rgba(96,165,250,0.1); color: var(--c1); border: 1px solid rgba(96,165,250,0.2); }
+.badge-practice { background: rgba(251,191,36,0.1); color: var(--c4); border: 1px solid rgba(251,191,36,0.2); }
+.badge-trick { background: rgba(248,113,113,0.1); color: var(--c5); border: 1px solid rgba(248,113,113,0.2); }
+.toggle-arrow { color: var(--dim); font-size: 11px; margin-top: 3px; transition: transform 0.2s; flex-shrink: 0; }
+.prob-card.open .toggle-arrow { transform: rotate(180deg); }
+
+.prob-body {
+  display: none;
+  padding: 0 18px 16px 54px;
+  border-top: 1px solid var(--border);
+}
+.prob-card.open .prob-body { display: block; }
+
+/* ── Solution content ── */
+.step {
+  display: flex; gap: 10px;
+  padding: 5px 0;
+  font-size: 13px; color: var(--muted);
+  border-bottom: 1px solid rgba(35,40,52,0.5);
+  line-height: 1.6;
+}
+.step:last-child { border-bottom: none; }
+.step::before { content: '▸'; color: var(--c2); flex-shrink: 0; margin-top: 1px; }
+.step strong { color: var(--text); font-weight: 500; }
+.step em { color: var(--c4); font-style: normal; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+.codeblock {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 10px 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text);
+  line-height: 2;
+  overflow-x: auto;
+}
+.codeblock .hi { color: var(--c3); font-weight: 600; }
+.codeblock .lo { color: var(--muted); }
+.codeblock .eq { color: var(--c4); }
+
+.formula-strip {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 10px 0;
+}
+.fbox {
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-left: 3px solid var(--c4);
+  border-radius: 0 6px 6px 0;
+  padding: 8px 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: var(--c4);
+  flex: 1; min-width: 160px;
+}
+.fbox .flabel { font-size: 10px; color: var(--muted); margin-bottom: 3px; font-family: 'Sora', sans-serif; }
+
+.answer-box {
+  background: rgba(52,211,153,0.05);
+  border: 1px solid rgba(52,211,153,0.2);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 13px; color: var(--c3);
+  font-family: 'JetBrains Mono', monospace;
+}
+.answer-box .alabel { font-size: 10px; color: var(--muted); font-family: 'Sora', sans-serif; margin-bottom: 3px; }
+
+.warn-box {
+  background: rgba(251,191,36,0.05);
+  border: 1px solid rgba(251,191,36,0.2);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-top: 10px;
+  font-size: 12.5px; color: var(--c4);
+}
+.warn-box strong { color: var(--c4); }
+
+.table-wrap { overflow-x: auto; margin: 10px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th {
+  background: var(--card2); color: var(--muted);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border2);
+}
+td { padding: 7px 10px; border-bottom: 1px solid rgba(35,40,52,0.5); color: var(--muted); vertical-align: top; }
+td strong { color: var(--text); font-weight: 500; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.012); }
+
+.divider {
+  text-align: center; color: var(--border2);
+  font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.2em; margin: 28px 0 0;
+  display: flex; align-items: center; gap: 10px;
+}
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+@media(max-width:600px){
+  .prob-body { padding-left: 18px; }
+  .formula-strip .fbox { min-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="site-header">
+  <div class="wrap" style="padding-top:0; padding-bottom:0;">
+    <div class="label-chip">CN Numericals · March 26</div>
+    <h1>Complete <span>Numericals</span> Pack</h1>
+    <p class="header-sub">Every numerical type from every topic — with full step-by-step solutions</p>
+    <div class="topic-pills">
+      <div class="pill pill-p">CRC / Error Detection</div>
+      <div class="pill pill-b">Hamming Distance</div>
+      <div class="pill pill-g">Subnetting / CIDR</div>
+      <div class="pill pill-a">IPv4 Header & Fragmentation</div>
+      <div class="pill pill-r">Stop-and-Wait ARQ</div>
+      <div class="pill pill-s">Go-Back-N & Selective Repeat</div>
+      <div class="pill pill-o">Baud Rate / Nyquist / Shannon</div>
+      <div class="pill pill-b">Distance Vector Routing</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 1 — CRC
+═══════════════════════════════════════════════ -->
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(167,139,250,0.05); border-color:rgba(167,139,250,0.25);">
+    <div class="topic-icon">⚙</div>
+    <div class="topic-title">CRC — Cyclic Redundancy Check</div>
+    <div class="topic-count">4 problems</div>
+  </div>
+
+  <!-- Q1 concept -->
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">C1</div>
+      <div class="prob-q"><strong>The CRC procedure</strong> — complete method, step by step</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Given:</strong> Dataword M (k bits) and Generator P (degree r, so P has r+1 bits). r = len(P) − 1.</span></div>
+      <div class="step"><span><strong>Step 1 — Append r zeros</strong> to M → M' = M followed by r zeros. M' has k+r bits.</span></div>
+      <div class="step"><span><strong>Step 2 — Modulo-2 divide</strong> M' ÷ P using XOR long division (no borrows, no carries). XOR rule: 1⊕1=0, 0⊕0=0, 1⊕0=1.</span></div>
+      <div class="step"><span><strong>Step 3 — Remainder = CRC.</strong> It will be exactly r bits. Pad with leading zeros if shorter.</span></div>
+      <div class="step"><span><strong>Step 4 — Transmitted codeword</strong> = M + CRC (replace the r zeros with the CRC).</span></div>
+      <div class="step"><span><strong>Verification:</strong> Receiver divides received frame ÷ P. Remainder = 0 → no error. Remainder ≠ 0 → error detected.</span></div>
+      <div class="warn-box"><strong>Division rule:</strong> If MSB of current chunk = 1 → XOR with P. If MSB = 0 → XOR with all-zeros same length (effectively just bring down next bit). Keep going until all bits of M' are consumed.</div>
+    </div>
+  </div>
+
+  <!-- Q2 solved -->
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">C2</div>
+      <div class="prob-q"><strong>Dataword = 1101011011,  Generator = 10011.</strong> Find CRC and transmitted codeword.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>r = len(10011) − 1 = 4.</strong> Append 4 zeros → M' = <em>11010110110000</em></span></div>
+      <div class="codeblock">
+        11010110110000  ÷  10011<br>
+        <span class="lo">XOR</span> 10011<br>
+        ──────<br>
+        &nbsp;1001110110000<br>
+        <span class="lo">XOR</span>&nbsp;&nbsp;10011<br>
+        &nbsp;─────────<br>
+        &nbsp;&nbsp;&nbsp;0000010110000 → skip, bring down → 10110000<br>
+        <span class="lo">XOR</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10011<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;──────<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0101000 → 101000<br>
+        <span class="lo">XOR</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10011<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;──────<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hi">01011</span> → Remainder = <span class="hi">1011</span>
+      </div>
+      <div class="answer-box"><div class="alabel">Answer</div>CRC = 1011 &nbsp;|&nbsp; Transmitted = 11010110111011</div>
+      <div class="step"><span><strong>Verify:</strong> 11010110111011 ÷ 10011 → remainder = 0000 ✓</span></div>
+    </div>
+  </div>
+
+  <!-- Q3 solved -->
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">C3</div>
+      <div class="prob-q"><strong>Dataword = 101100,  Generator = 1011.</strong> Find CRC, transmitted frame, and verify.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>r = 3.</strong> Append 3 zeros → M' = <em>101100000</em></span></div>
+      <div class="codeblock">
+        101100000  ÷  1011<br>
+        <span class="lo">XOR</span> 1011<br>
+        ────<br>
+        &nbsp;0001 00000 → bring down → 100000<br>
+        <span class="lo">XOR</span>&nbsp;&nbsp;&nbsp;1011<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;──────<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;011100 → 11100<br>
+        <span class="lo">XOR</span>&nbsp;&nbsp;1011<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;─────<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;01110 → 1110<br>
+        <span class="lo">XOR</span>&nbsp;1011<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;────<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hi">0101</span> → Remainder = <span class="hi">101</span> → pad to 3 bits = <span class="hi">101</span>
+      </div>
+      <div class="answer-box"><div class="alabel">Answer</div>CRC = 101 &nbsp;|&nbsp; Transmitted = 101100101</div>
+      <div class="step"><span><strong>Verify:</strong> 101100101 ÷ 1011 → remainder = 000 ✓</span></div>
+    </div>
+  </div>
+
+  <!-- Q4 trick -->
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">C4</div>
+      <div class="prob-q"><strong>Dataword = 11010,  Generator = 1011.</strong> Find CRC and transmitted frame.</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>r = 3.</strong> M' = <em>11010000</em></span></div>
+      <div class="codeblock">
+        11010000  ÷  1011<br>
+        <span class="lo">XOR</span> 1011<br>
+        ────<br>
+        &nbsp;0110 0000 → 1100000<br>
+        <span class="lo">XOR</span>&nbsp;1011<br>
+        &nbsp;──────<br>
+        &nbsp;0111000 → 111000<br>
+        <span class="lo">XOR</span> 1011<br>
+        &nbsp;─────<br>
+        &nbsp;010100 → 10100<br>
+        <span class="lo">XOR</span> 1011<br>
+        &nbsp;─────<br>
+        &nbsp;<span class="hi">01110</span> → last 3 bits = <span class="hi">110</span>
+      </div>
+      <div class="answer-box"><div class="alabel">Answer</div>CRC = 110 &nbsp;|&nbsp; Transmitted = 11010110</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 2 — HAMMING DISTANCE
+═══════════════════════════════════════════════ -->
+<div class="divider">HAMMING DISTANCE & BLOCK CODING</div>
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(96,165,250,0.05); border-color:rgba(96,165,250,0.25);">
+    <div class="topic-icon">📐</div>
+    <div class="topic-title">Hamming Distance & Block Coding</div>
+    <div class="topic-count">6 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">H1</div>
+      <div class="prob-q"><strong>Find d(10101, 11110)</strong> and d(000, 011).</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Method:</strong> XOR the two words, then count the number of 1s in the result.</span></div>
+      <div class="codeblock">
+        10101 XOR 11110 = <span class="hi">01011</span> → three 1s → <span class="eq">d = 3</span><br>
+        000 XOR 011 = <span class="hi">011</span> → two 1s → <span class="eq">d = 2</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">H2</div>
+      <div class="prob-q"><strong>Find d<sub>min</sub></strong> for the set {00000, 01011, 10101, 11110}.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span>Calculate all pairwise Hamming distances:</span></div>
+      <div class="codeblock">
+        d(00000, 01011) = XOR = 01011 → <span class="eq">3</span><br>
+        d(00000, 10101) = XOR = 10101 → <span class="eq">3</span><br>
+        d(00000, 11110) = XOR = 11110 → <span class="eq">4</span><br>
+        d(01011, 10101) = XOR = 11110 → <span class="eq">4</span><br>
+        d(01011, 11110) = XOR = 10101 → <span class="eq">3</span><br>
+        d(10101, 11110) = XOR = 01011 → <span class="eq">3</span>
+      </div>
+      <div class="answer-box"><div class="alabel">Answer</div>d_min = 3 (smallest value in the list)</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">H3</div>
+      <div class="prob-q"><strong>d<sub>min</sub> = 4.</strong> What is the max number of errors this code can detect? Correct?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="formula-strip">
+        <div class="fbox"><div class="flabel">Error Detection</div>s ≤ d_min − 1</div>
+        <div class="fbox"><div class="flabel">Error Correction</div>t ≤ (d_min − 1) / 2</div>
+      </div>
+      <div class="step"><span><strong>Detection:</strong> s = d_min − 1 = 4 − 1 = <em>3 errors detectable</em></span></div>
+      <div class="step"><span><strong>Correction:</strong> t = floor((4−1)/2) = floor(1.5) = <em>1 error correctable</em></span></div>
+      <div class="warn-box"><strong>Key insight:</strong> d_min = 4 is even — part of correction capability is wasted. Error correction codes should ideally have odd d_min (3, 5, 7...). With d_min=4 you correct 1 but detect up to 3.</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">H4</div>
+      <div class="prob-q"><strong>C(n,k) coding scheme:</strong> k=4, r=3. How many total codewords? How many valid? How many unused?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>n = k + r = 4 + 3 = 7 bits per codeword</strong></span></div>
+      <div class="step"><span><strong>Total possible codewords:</strong> 2<sup>n</sup> = 2<sup>7</sup> = <em>128</em></span></div>
+      <div class="step"><span><strong>Valid datawords (= valid codewords):</strong> 2<sup>k</sup> = 2<sup>4</sup> = <em>16</em></span></div>
+      <div class="step"><span><strong>Unused codewords:</strong> 2<sup>n</sup> − 2<sup>k</sup> = 128 − 16 = <em>112</em></span></div>
+      <div class="step"><span>These 112 unused codewords are what make error detection possible — a corrupted codeword lands in an unused slot and is recognized as an error.</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">H5</div>
+      <div class="prob-q">What is d_min needed to <strong>detect up to 3 errors</strong>? To <strong>correct up to 2 errors</strong>?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>To detect s=3 errors:</strong> d_min ≥ s + 1 = 3 + 1 = <em>4</em></span></div>
+      <div class="step"><span><strong>To correct t=2 errors:</strong> d_min ≥ 2t + 1 = 2(2) + 1 = <em>5</em></span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">H6</div>
+      <div class="prob-q">Codeword 00000 is sent. 01101 is received. How many bits are in error? What is the Hamming distance?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="codeblock">00000 XOR 01101 = <span class="hi">01101</span> → three 1s</div>
+      <div class="answer-box"><div class="alabel">Answer</div>3 bits in error. d(00000, 01101) = 3</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 3 — STOP-AND-WAIT ARQ
+═══════════════════════════════════════════════ -->
+<div class="divider">FLOW CONTROL — ARQ PROTOCOLS</div>
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(248,113,113,0.05); border-color:rgba(248,113,113,0.25);">
+    <div class="topic-icon">⏱</div>
+    <div class="topic-title">Stop-and-Wait ARQ</div>
+    <div class="topic-count">4 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SW1</div>
+      <div class="prob-q"><strong>Formulas to memorize</strong> — Stop-and-Wait efficiency and variants</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="formula-strip">
+        <div class="fbox"><div class="flabel">Transmission Delay</div>Tt = L / B</div>
+        <div class="fbox"><div class="flabel">Propagation Delay</div>Tp = D / V</div>
+        <div class="fbox"><div class="flabel">a (ratio)</div>a = Tp / Tt</div>
+        <div class="fbox"><div class="flabel">S&W Efficiency</div>η = 1 / (1 + 2a)</div>
+        <div class="fbox"><div class="flabel">RTT</div>RTT = 2 × Tp</div>
+        <div class="fbox"><div class="flabel">Throughput</div>η × Bandwidth</div>
+      </div>
+      <div class="step"><span><strong>L</strong> = packet size in bits = bytes × 8. <strong>B</strong> = bandwidth in bps. <strong>D</strong> = distance. <strong>V</strong> = propagation speed.</span></div>
+      <div class="step"><span>If RTT is directly given: <em>Tp = RTT / 2</em>. Total cycle time = Tt + 2Tp.</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SW2</div>
+      <div class="prob-q">Bandwidth = <strong>1.5 Mbps</strong>, RTT = <strong>45 ms</strong>, Packet size = <strong>1 KB</strong>. Find link utilization.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>L = 1 KB = 1 × 1024 × 8 = 8192 bits</strong></span></div>
+      <div class="step"><span><strong>Tt = L/B = 8192 / (1.5 × 10⁶) = 0.005461 s = <em>5.461 ms</em></strong></span></div>
+      <div class="step"><span><strong>Tp = RTT/2 = 45/2 = <em>22.5 ms</em></strong></span></div>
+      <div class="step"><span><strong>a = Tp/Tt = 22.5 / 5.461 = <em>4.12</em></strong></span></div>
+      <div class="step"><span><strong>η = 1 / (1 + 2×4.12) = 1 / 9.24 = <em>0.108 = 10.8%</em></strong></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>Link utilization ≈ 10.8%</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SW3</div>
+      <div class="prob-q">Bit rate = <strong>4 Kbps</strong>, Propagation delay = <strong>20 ms</strong>, S&W protocol. Find <strong>minimum packet size</strong> for ≥20% efficiency.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>η ≥ 0.20 → 1/(1+2a) ≥ 1/5 → 1+2a ≤ 5 → 2a ≤ 4 → a ≤ 2</strong></span></div>
+      <div class="step"><span><strong>a = Tp/Tt ≤ 2 → Tp ≤ 2 × Tt</strong></span></div>
+      <div class="step"><span><strong>Tt = L/B → 0.020 ≤ 2 × (L / 4000) → L ≥ 0.020 × 4000 / 2 = 40 bits</strong></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>Minimum packet size L ≥ 40 bits = 5 bytes</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SW4</div>
+      <div class="prob-q">A 1 Mbps satellite link, altitude = 36,504 km, signal speed = 3×10⁸ m/s. <strong>Find propagation delay</strong> and check if S&W is efficient.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Tp = D/V = 36,504,000 m / (3×10⁸ m/s) = 0.1217 s = <em>121.7 ms</em></strong></span></div>
+      <div class="step"><span>For a 1000-bit packet: Tt = 1000 / 10⁶ = 1 ms</span></div>
+      <div class="step"><span><strong>a = 121.7 / 1 = 121.7</strong> → η = 1/(1+243.4) ≈ <em>0.41%</em></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>Tp ≈ 121.7 ms. S&W is extremely inefficient (0.41%) — sliding window protocols are needed for satellite links.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 4 — GO-BACK-N & SELECTIVE REPEAT
+═══════════════════════════════════════════════ -->
+<div class="topic-block" style="margin-top:0; border-top:none;">
+  <div class="topic-header" style="background:rgba(56,189,248,0.05); border-color:rgba(56,189,248,0.25); margin-top:12px; border-radius:10px 10px 0 0;">
+    <div class="topic-icon">🔁</div>
+    <div class="topic-title">Go-Back-N & Selective Repeat ARQ</div>
+    <div class="topic-count">5 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">GS1</div>
+      <div class="prob-q"><strong>Window & sequence number formulas</strong> for both protocols</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Parameter</th><th>Stop-and-Wait</th><th>Go-Back-N</th><th>Selective Repeat</th></tr>
+          <tr><td><strong>Sender window</strong></td><td>1</td><td>N</td><td>N = 2^(n-1)</td></tr>
+          <tr><td><strong>Receiver window</strong></td><td>1</td><td>1</td><td>N = 2^(n-1)</td></tr>
+          <tr><td><strong>Min seq numbers</strong></td><td>2</td><td>N+1</td><td>2N</td></tr>
+          <tr><td><strong>Efficiency</strong></td><td>1/(1+2a)</td><td>N/(1+2a)</td><td>N/(1+2a)</td></tr>
+          <tr><td><strong>On error</strong></td><td>Retransmit lost</td><td>Retransmit entire window</td><td>Retransmit only lost</td></tr>
+        </table>
+      </div>
+      <div class="step"><span>If n-bit sequence number field is used: GBN window = 2^n − 1; SR window = 2^(n-1).</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">GS2</div>
+      <div class="prob-q">Satellite link: <strong>20 Kbps, 400 ms propagation, Go-Back-N N=10, 100-byte frames.</strong> Find efficiency and throughput.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Tt = (100×8) / 20,000 = 800/20,000 = 0.04 s = <em>40 ms</em></strong></span></div>
+      <div class="step"><span><strong>a = Tp/Tt = 400/40 = <em>10</em></strong></span></div>
+      <div class="step"><span><strong>η = N/(1+2a) = 10/(1+20) = 10/21 ≈ <em>0.476 = 47.6%</em></strong></span></div>
+      <div class="step"><span><strong>Throughput = η × B = 0.476 × 20 Kbps = <em>9.52 Kbps ≈ 10 Kbps</em></strong></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>η = 47.6%, Throughput ≈ 9.52 Kbps</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">GS3</div>
+      <div class="prob-q">1 Mbps satellite, altitude 36,504 km, signal speed 3×10⁸ m/s. <strong>Go-Back-N with window = 254.</strong> Find minimum packet size for 50% efficiency.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Tp = 36,504,000 / (3×10⁸) = 0.12168 s ≈ <em>121.68 ms</em></strong></span></div>
+      <div class="step"><span><strong>For η ≥ 50%: N/(1+2a) ≥ 0.5 → 254/(1+2a) ≥ 0.5 → 1+2a ≤ 508 → a ≤ 253.5</strong></span></div>
+      <div class="step"><span><strong>a = Tp/Tt ≤ 253.5 → Tt ≥ 121.68/253.5 = 0.4801 ms</strong></span></div>
+      <div class="step"><span><strong>Tt = L/B → L ≥ 0.0004801 × 10⁶ = 480.1 bits ≈ <em>481 bits</em></strong></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>Minimum packet size ≈ 481 bits ≈ 61 bytes</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">GS4</div>
+      <div class="prob-q">A protocol uses a <strong>3-bit sequence number field.</strong> What is the max window size for Go-Back-N? For Selective Repeat?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>3-bit sequence field → 2³ = 8 possible sequence numbers (0 to 7)</strong></span></div>
+      <div class="step"><span><strong>Go-Back-N max window = 2ⁿ − 1 = 8 − 1 = <em>7</em></strong></span></div>
+      <div class="step"><span><strong>Selective Repeat max window = 2^(n−1) = 2² = <em>4</em></strong></span></div>
+      <div class="warn-box"><strong>Why is SR window half of GBN?</strong> In SR, receiver buffers out-of-order frames. If window > 2^(n-1), receiver can't distinguish old frames from new ones with the same sequence number — duplicates become undetectable.</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">GS5</div>
+      <div class="prob-q"><strong>Selective Repeat, n=4 bits.</strong> What is window size, min seq numbers, and efficiency if Tp=200ms, Tt=10ms?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Window N = 2^(n-1) = 2^(4-1) = 2³ = <em>8</em></strong></span></div>
+      <div class="step"><span><strong>Min seq numbers = 2N = 2×8 = <em>16</em></strong></span></div>
+      <div class="step"><span><strong>a = Tp/Tt = 200/10 = 20</strong></span></div>
+      <div class="step"><span><strong>η = N/(1+2a) = 8/(1+40) = 8/41 ≈ <em>0.195 = 19.5%</em></strong></span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 5 — IPv4 HEADER
+═══════════════════════════════════════════════ -->
+<div class="divider">IPv4 HEADER & FRAGMENTATION</div>
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(251,191,36,0.05); border-color:rgba(251,191,36,0.25);">
+    <div class="topic-icon">📦</div>
+    <div class="topic-title">IPv4 Header Length & Datagram Parsing</div>
+    <div class="topic-count">6 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">IP1</div>
+      <div class="prob-q"><strong>HLEN quick-reference</strong> — all calculations at a glance</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="formula-strip">
+        <div class="fbox"><div class="flabel">Header size</div>HLEN × 4 bytes</div>
+        <div class="fbox"><div class="flabel">Options size</div>(HLEN × 4) − 20</div>
+        <div class="fbox"><div class="flabel">Data size</div>Total Length − (HLEN × 4)</div>
+        <div class="fbox"><div class="flabel">Min HLEN</div>5 → 20 bytes (no options)</div>
+        <div class="fbox"><div class="flabel">Max HLEN</div>15 → 60 bytes</div>
+      </div>
+      <div class="step"><span><strong>Hex conversion:</strong> 0x0028 = 2×16 + 8 = 40. 0x003C = 3×16 + 12 = 60. 0x05DC = 5×256 + 13×16 + 12 = 1500.</span></div>
+      <div class="step"><span><strong>Protocol field:</strong> 1=ICMP, 2=IGMP, 6=TCP, 17=UDP, 89=OSPF</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">IP2</div>
+      <div class="prob-q">First 8 bits of packet = <strong>01000010</strong>. Receiver discards it. Why?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="codeblock">01000010 → split 4|4 = <span class="eq">0100</span> | <span class="hi">0010</span><br>Version = 0100 = 4 ✓ (IPv4 correct)<br>HLEN = 0010 = 2 → header = 2×4 = <span class="hi">8 bytes</span><br>Minimum header must be 20 bytes. 8 &lt; 20 → <span class="hi">INVALID → DISCARD</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">IP3</div>
+      <div class="prob-q">HLEN = <strong>1000</strong> (binary). How many bytes of options?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>HLEN = 1000₂ = 8₁₀ → Header = 8 × 4 = 32 bytes</strong></span></div>
+      <div class="step"><span><strong>Options = 32 − 20 = <em>12 bytes</em></strong></span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">IP4</div>
+      <div class="prob-q">HLEN = <strong>5</strong>, Total Length = <strong>0x0028</strong>. How many bytes of data?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Header = 5 × 4 = 20 bytes</strong> (no options, HLEN=5 is minimum)</span></div>
+      <div class="step"><span><strong>Total Length = 0x0028 = 2×16 + 8 = 40 bytes</strong></span></div>
+      <div class="step"><span><strong>Data = 40 − 20 = <em>20 bytes</em></strong></span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">IP5</div>
+      <div class="prob-q">Packet hex: <strong>0x45000028000100000102…</strong>. How many hops can it travel? What upper-layer protocol?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Parse byte by byte (2 hex digits = 1 byte):</strong></span></div>
+      <div class="codeblock">
+        <span class="lo">Byte 1:</span> 45 → Version=4, HLEN=5<br>
+        <span class="lo">Byte 2:</span> 00 → TOS<br>
+        <span class="lo">Bytes 3-4:</span> 00 28 → Total Length = 40<br>
+        <span class="lo">Bytes 5-6:</span> 00 01 → Identification<br>
+        <span class="lo">Bytes 7-8:</span> 00 00 → Flags + Offset<br>
+        <span class="hi">Byte 9:</span> 01 → <span class="eq">TTL = 1</span> (1 hop remaining)<br>
+        <span class="hi">Byte 10:</span> 02 → <span class="eq">Protocol = 2 = IGMP</span>
+      </div>
+      <div class="answer-box"><div class="alabel">Answer</div>TTL = 1 → packet can travel 1 hop. Protocol = 2 = IGMP.</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">IP6</div>
+      <div class="prob-q">Identify addresses: <strong>00000001 00001011 00001011 11101111</strong> and <strong>252.5.15.111</strong> — which class?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Binary address first bit = 0 → Class A</strong> (Class A: first bit = 0)</span></div>
+      <div class="step"><span><strong>252.5.15.111 → first byte = 252.</strong> Class boundaries: A=0-127, B=128-191, C=192-223, D=224-239, E=240-255. 252 is in 240-255 → <strong>Class E</strong></span></div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Class</th><th>First bit(s)</th><th>First byte range</th><th>Default mask</th></tr>
+          <tr><td><strong>A</strong></td><td>0</td><td>0 – 127</td><td>/8</td></tr>
+          <tr><td><strong>B</strong></td><td>10</td><td>128 – 191</td><td>/16</td></tr>
+          <tr><td><strong>C</strong></td><td>110</td><td>192 – 223</td><td>/24</td></tr>
+          <tr><td><strong>D</strong></td><td>1110</td><td>224 – 239</td><td>—</td></tr>
+          <tr><td><strong>E</strong></td><td>1111</td><td>240 – 255</td><td>—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 6 — FRAGMENTATION
+═══════════════════════════════════════════════ -->
+<div class="topic-block" style="margin-top:0;">
+  <div class="topic-header" style="background:rgba(251,191,36,0.04); border-color:rgba(251,191,36,0.2); margin-top:12px; border-radius:10px 10px 0 0;">
+    <div class="topic-icon">✂</div>
+    <div class="topic-title">IPv4 Fragmentation</div>
+    <div class="topic-count">6 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">FR1</div>
+      <div class="prob-q"><strong>Fragmentation formulas</strong> and key rules</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="formula-strip">
+        <div class="fbox"><div class="flabel">Max data per fragment</div>(MTU − 20) rounded down to multiple of 8</div>
+        <div class="fbox"><div class="flabel">Fragment offset</div>byte_position / 8</div>
+        <div class="fbox"><div class="flabel">First byte of fragment</div>offset × 8</div>
+        <div class="fbox"><div class="flabel">Last byte</div>first_byte + data_bytes − 1</div>
+        <div class="fbox"><div class="flabel">Number of fragments</div>⌈ data_bytes / max_data_per_frag ⌉</div>
+      </div>
+      <div class="step"><span><strong>MF bit:</strong> 1 = more fragments follow. 0 = last (or only) fragment.</span></div>
+      <div class="step"><span><strong>Offset = 0 and MF = 1:</strong> First fragment. <strong>Offset > 0 and MF = 1:</strong> Middle fragment. <strong>MF = 0:</strong> Last fragment.</span></div>
+      <div class="step"><span><strong>Every fragment carries a 20-byte header.</strong> Fragment data must be multiple of 8 bytes except the last fragment.</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">FR2</div>
+      <div class="prob-q">M bit = <strong>0</strong>. Is this the first, last, or middle fragment?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>MF = 0 means no more fragments follow → this is the last fragment.</strong></span></div>
+      <div class="step"><span>However, we cannot say whether the original packet was fragmented at all. A non-fragmented packet also has MF = 0 — it is treated as the last (and only) fragment.</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">FR3</div>
+      <div class="prob-q">Offset value = <strong>100</strong>, HLEN = <strong>5</strong>, Total Length = <strong>100</strong>. Find first byte and last byte.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>First byte = offset × 8 = 100 × 8 = <em>800</em></strong></span></div>
+      <div class="step"><span><strong>Header size = HLEN × 4 = 5 × 4 = 20 bytes</strong></span></div>
+      <div class="step"><span><strong>Data bytes in this fragment = Total Length − Header = 100 − 20 = 80 bytes</strong></span></div>
+      <div class="step"><span><strong>Last byte = First byte + data − 1 = 800 + 80 − 1 = <em>879</em></strong></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>First byte = 800, Last byte = 879</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">FR4</div>
+      <div class="prob-q"><strong>1440-byte packet, MTU = 576 bytes, 20-byte header.</strong> Find: number of fragments, MF flag, total length, and offset for each fragment.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Original data = 1440 − 20 = 1420 bytes</strong></span></div>
+      <div class="step"><span><strong>Max data per fragment = MTU − 20 = 576 − 20 = 556 bytes.</strong> Must be multiple of 8: 556 ÷ 8 = 69.5 → round down → <em>552 bytes</em></span></div>
+      <div class="step"><span><strong>Fragments = ⌈1420 / 552⌉ = ⌈2.57⌉ = <em>3 fragments</em></strong></span></div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Fragment</th><th>Data bytes</th><th>Total Length</th><th>Offset</th><th>MF flag</th></tr>
+          <tr><td><strong>1</strong></td><td>552</td><td>552+20 = 572</td><td>0/8 = <strong>0</strong></td><td><strong>1</strong></td></tr>
+          <tr><td><strong>2</strong></td><td>552</td><td>572</td><td>552/8 = <strong>69</strong></td><td><strong>1</strong></td></tr>
+          <tr><td><strong>3</strong></td><td>1420−1104 = 316</td><td>316+20 = 336</td><td>1104/8 = <strong>138</strong></td><td><strong>0</strong></td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">FR5</div>
+      <div class="prob-q">IP packet = <strong>4404 bytes</strong>, MTU = <strong>1500 bytes</strong>, header = <strong>20 bytes</strong>. Find fragment count, offset & MF for 3rd fragment.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Total data = 4404 − 20 = 4384 bytes</strong></span></div>
+      <div class="step"><span><strong>Max data per fragment = 1500 − 20 = 1480 bytes</strong> (already multiple of 8 ✓)</span></div>
+      <div class="step"><span><strong>Fragments = ⌈4384/1480⌉ = ⌈2.96⌉ = <em>3 fragments</em></strong></span></div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Fragment</th><th>Bytes carried</th><th>Byte range</th><th>Offset</th><th>MF</th><th>Total Length</th></tr>
+          <tr><td><strong>1</strong></td><td>1480</td><td>0 – 1479</td><td>0/8 = <strong>0</strong></td><td><strong>1</strong></td><td>1500</td></tr>
+          <tr><td><strong>2</strong></td><td>1480</td><td>1480 – 2959</td><td>1480/8 = <strong>185</strong></td><td><strong>1</strong></td><td>1500</td></tr>
+          <tr><td><strong>3</strong></td><td>4384−2960=1424</td><td>2960 – 4383</td><td>2960/8 = <strong>370</strong></td><td><strong>0</strong></td><td>1444</td></tr>
+        </table>
+      </div>
+      <div class="answer-box"><div class="alabel">3rd Fragment Answer</div>MF = 0, Total Length = 1444, Offset = 370 → Option (A)</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">FR6</div>
+      <div class="prob-q">Offset = <strong>100</strong>, MF = <strong>1</strong>. What kind of fragment? Offset = <strong>0</strong>, MF = <strong>1</strong>?</div>
+      <div class="prob-badge badge-trick">TRICK</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Offset=100, MF=1:</strong> MF=1 means NOT the last. Offset=100 ≠ 0 means NOT the first. → <em>Middle fragment</em></span></div>
+      <div class="step"><span><strong>Offset=0, MF=1:</strong> MF=1 means NOT the last. Offset=0 means this IS the first. → <em>First fragment</em></span></div>
+      <div class="warn-box"><strong>Quick rule:</strong> MF=0 → last. MF=1+Offset=0 → first. MF=1+Offset>0 → middle.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 7 — SUBNETTING
+═══════════════════════════════════════════════ -->
+<div class="divider">SUBNETTING & CIDR</div>
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(52,211,153,0.05); border-color:rgba(52,211,153,0.25);">
+    <div class="topic-icon">🌐</div>
+    <div class="topic-title">Subnetting & CIDR Addressing</div>
+    <div class="topic-count">6 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SN1</div>
+      <div class="prob-q"><strong>Subnetting method</strong> — complete procedure</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Step 1:</strong> n = prefix length. Host bits = 32 − n.</span></div>
+      <div class="step"><span><strong>Step 2 — Subnet Mask:</strong> n ones followed by (32-n) zeros. Last octet shortcuts: /25→128, /26→192, /27→224, /28→240, /29→248, /30→252.</span></div>
+      <div class="step"><span><strong>Step 3 — First address (Network):</strong> AND IP with mask. OR: set last (32-n) bits of last relevant octet to 0.</span></div>
+      <div class="step"><span><strong>Step 4 — Last address (Broadcast):</strong> OR IP with inverted mask. OR: set last (32-n) bits to 1.</span></div>
+      <div class="step"><span><strong>Step 5:</strong> Total addresses = 2^(32-n). Usable hosts = 2^(32-n) − 2.</span></div>
+      <div class="step"><span><strong>Subnetting a network:</strong> Bits borrowed = new prefix − original prefix. Number of subnets = 2^(borrowed bits).</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SN2</div>
+      <div class="prob-q">IP = <strong>205.16.37.39/28</strong>. Find: mask, first address, last address, total hosts.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>/28 → host bits = 4. Mask = 255.255.255.240</strong></span></div>
+      <div class="step"><span><strong>39 in binary = 00100111.</strong> Set last 4 bits to 0 → 00100000 = <em>32</em> → First = <em>205.16.37.32</em></span></div>
+      <div class="step"><span><strong>Set last 4 bits to 1</strong> → 00101111 = <em>47</em> → Last = <em>205.16.37.47</em></span></div>
+      <div class="step"><span><strong>Total = 2⁴ = 16. Usable hosts = 14.</strong></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>Network: 205.16.37.32 | Broadcast: 205.16.37.47 | Usable: 14 hosts</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SN3</div>
+      <div class="prob-q">IP = <strong>192.168.10.65/26</strong>. Find all subnet details.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>/26 → host bits = 6. Mask = 255.255.255.192</strong></span></div>
+      <div class="step"><span><strong>65 = 01000001.</strong> Top 2 bits (network within octet) = 01. Set last 6 bits to 0 → 01000000 = 64 → Network = <em>192.168.10.64</em></span></div>
+      <div class="step"><span><strong>Set last 6 to 1</strong> → 01111111 = 127 → Broadcast = <em>192.168.10.127</em></span></div>
+      <div class="step"><span><strong>Host range: 192.168.10.65 → 192.168.10.126. Usable = 2⁶ − 2 = 62 hosts.</strong></span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SN4</div>
+      <div class="prob-q">IP = <strong>192.168.1.130/26</strong>. Find network address, broadcast, host range, usable hosts.</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>/26 → host bits = 6. Mask = 255.255.255.192</strong></span></div>
+      <div class="step"><span><strong>130 = 10000010.</strong> Top 2 network bits = 10. Set last 6 to 0 → 10000000 = 128 → Network = <em>192.168.1.128</em></span></div>
+      <div class="step"><span><strong>Set last 6 to 1</strong> → 10111111 = 191 → Broadcast = <em>192.168.1.191</em></span></div>
+      <div class="step"><span><strong>Host range: .129 → .190. Usable = 62 hosts.</strong></span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SN5</div>
+      <div class="prob-q">Network <strong>172.16.0.0/16</strong>. Need subnets supporting ≥500 hosts each. Find new prefix and number of subnets.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Need 2^h − 2 ≥ 500 → 2^h ≥ 502.</strong> Try h=9: 2⁹ = 512, 512−2 = 510 ≥ 500 ✓</span></div>
+      <div class="step"><span><strong>New prefix = 32 − 9 = /23. Mask = 255.255.254.0</strong></span></div>
+      <div class="step"><span><strong>Bits borrowed = 23 − 16 = 7. Number of subnets = 2⁷ = 128</strong></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>New prefix = /23. 128 subnets, each with 510 usable hosts.</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">SN6</div>
+      <div class="prob-q">Convert binary IP <strong>11000001 10000011 00011011 11111111</strong> to dotted-decimal. Which class?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="codeblock">
+        11000001 = 128+64+1 = <span class="eq">193</span><br>
+        10000011 = 128+2+1 = <span class="eq">131</span><br>
+        00011011 = 16+8+2+1 = <span class="eq">27</span><br>
+        11111111 = <span class="eq">255</span><br>
+        IP = <span class="hi">193.131.27.255</span>
+      </div>
+      <div class="step"><span><strong>First 2 bits = 11, third bit = 0 → Class C</strong> (110 = Class C, first byte 192-223). 193 ∈ [192,223] ✓</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 8 — BAUD RATE / NYQUIST / SHANNON
+═══════════════════════════════════════════════ -->
+<div class="divider">BAUD RATE · NYQUIST · SHANNON</div>
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(251,146,60,0.05); border-color:rgba(251,146,60,0.25);">
+    <div class="topic-icon">📡</div>
+    <div class="topic-title">Baud Rate, Nyquist & Shannon Capacity</div>
+    <div class="topic-count">7 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">BR1</div>
+      <div class="prob-q"><strong>All formulas</strong> — baud rate, Nyquist, Shannon</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="formula-strip">
+        <div class="fbox"><div class="flabel">Baud Rate (general)</div>S = cN / r</div>
+        <div class="fbox"><div class="flabel">Bit Rate from S</div>N = S × log₂(L)</div>
+        <div class="fbox"><div class="flabel">Nyquist (noiseless)</div>N = 2B × log₂(L)</div>
+        <div class="fbox"><div class="flabel">Shannon (noisy)</div>N = B × log₂(1 + SNR)</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Scheme</th><th>c (case factor)</th><th>r (data/signal)</th><th>Baud vs Bit rate</th></tr>
+          <tr><td><strong>NRZ-L, NRZ-I</strong></td><td>1 (worst), ½ (avg)</td><td>1</td><td>S = N (worst case)</td></tr>
+          <tr><td><strong>RZ</strong></td><td>1</td><td>½</td><td>S = 2N</td></tr>
+          <tr><td><strong>Manchester</strong></td><td>1</td><td>½</td><td>S = 2N (always)</td></tr>
+          <tr><td><strong>AMI, Pseudoternary</strong></td><td>1</td><td>1</td><td>S = N</td></tr>
+          <tr><td><strong>Multilevel (L levels)</strong></td><td>—</td><td>log₂L bits/baud</td><td>N = S × log₂(L)</td></tr>
+        </table>
+      </div>
+      <div class="step"><span><strong>Limiting factor:</strong> Actual max rate = min(Nyquist, Shannon). Nyquist limits due to levels; Shannon limits due to noise.</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">BR2</div>
+      <div class="prob-q">Bit rate = <strong>4000 bps</strong>, baud rate = <strong>1000 baud</strong>. How many bits per signal element? How many levels?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Bits per element = N/S = 4000/1000 = <em>4 bits per baud</em></strong></span></div>
+      <div class="step"><span><strong>Levels L: 4 = log₂(L) → L = 2⁴ = <em>16 signal levels</em></strong></span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">BR3</div>
+      <div class="prob-q">Bit rate = <strong>2000 bps</strong>. Find baud rate for <strong>NRZ-L</strong> (worst case) and <strong>Manchester</strong>.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>NRZ-L worst case: c=1, r=1 → S = cN/r = 1×2000/1 = <em>2000 baud</em></strong></span></div>
+      <div class="step"><span><strong>Manchester: c=1, r=1/2 → S = 1×2000/(1/2) = <em>4000 baud</em></strong></span></div>
+      <div class="step"><span>Manchester always needs double the baud rate of NRZ — that's the bandwidth penalty for built-in clock synchronisation.</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">BR4</div>
+      <div class="prob-q">Channel bandwidth = <strong>3000 Hz</strong>, SNR = <strong>3162</strong>, signal levels = <strong>8</strong>. Find Nyquist capacity and Shannon capacity.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Nyquist (L=8=2³, log₂8=3):</strong> N = 2×3000×3 = <em>18,000 bps = 18 Kbps</em></span></div>
+      <div class="step"><span><strong>Shannon:</strong> N = 3000 × log₂(1+3162) = 3000 × log₂(3163)</span></div>
+      <div class="step"><span>log₂(3163): 2¹¹=2048, 2¹²=4096. 3163 is between, closer to 4096. log₂(3163) ≈ 11.63</span></div>
+      <div class="step"><span>N = 3000 × 11.63 ≈ <em>34,890 bps ≈ 34.9 Kbps</em></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>Nyquist = 18 Kbps | Shannon ≈ 34.9 Kbps | Limiting factor = Nyquist (lower)</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">BR5</div>
+      <div class="prob-q">Channel B = <strong>4000 Hz</strong>, L = <strong>4 levels</strong>, SNR = <strong>63</strong>. Find Nyquist and Shannon. Which limits?</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Nyquist (L=4, log₂4=2):</strong> N = 2×4000×2 = <em>16,000 bps = 16 Kbps</em></span></div>
+      <div class="step"><span><strong>Shannon:</strong> N = 4000 × log₂(1+63) = 4000 × log₂(64) = 4000 × 6 = <em>24,000 bps = 24 Kbps</em></span></div>
+      <div class="answer-box"><div class="alabel">Answer</div>Nyquist (16 Kbps) is the limiting factor. Actual max = 16 Kbps.</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">BR6</div>
+      <div class="prob-q">A signal has <strong>S = 1000 baud</strong> and carries <strong>2 bits per baud</strong>. What is the bit rate?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>N = S × bits per baud = 1000 × 2 = <em>2000 bps</em></strong></span></div>
+      <div class="step"><span>Alternatively: L = 2² = 4 levels. N = S × log₂(L) = 1000 × 2 = 2000 bps ✓</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">BR7</div>
+      <div class="prob-q">For <strong>AMI encoding</strong> with bit rate 2 Mbps, what is the baud rate? How does it compare with NRZ?</div>
+      <div class="prob-badge badge-practice">PRACTICE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>AMI: c=1, r=1 → S = cN/r = 2 Mbps / 1 = <em>2 Mbaud</em></strong></span></div>
+      <div class="step"><span><strong>NRZ worst case: S = N = 2 Mbaud</strong> (same baud rate)</span></div>
+      <div class="step"><span>AMI and NRZ have the same baud rate, but AMI uses 3 voltage levels (+, 0, −), giving better error detection (a single-level violation is an error) and no DC component.</span></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     TOPIC 9 — DISTANCE VECTOR ROUTING
+═══════════════════════════════════════════════ -->
+<div class="divider">DISTANCE VECTOR ROUTING</div>
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(96,165,250,0.05); border-color:rgba(96,165,250,0.25);">
+    <div class="topic-icon">🗺</div>
+    <div class="topic-title">Distance Vector Routing — Table Problems</div>
+    <div class="topic-count">4 problems</div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">DV1</div>
+      <div class="prob-q"><strong>Bellman-Ford update rule</strong> — how to fill a distance vector table</div>
+      <div class="prob-badge badge-concept">CONCEPT</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Formula:</strong> D(x, y) = min over all neighbors v { cost(x→v) + D(v, y) }</span></div>
+      <div class="step"><span><strong>Initialization:</strong> Each router knows only its direct neighbors. Cost to self = 0. Cost to direct neighbor = link weight. Cost to all others = ∞.</span></div>
+      <div class="step"><span><strong>Update:</strong> When router X receives table from neighbor V, for each destination Y: new_cost = cost(X→V) + D(V,Y). If new_cost &lt; current D(X,Y), update the table and next hop.</span></div>
+      <div class="step"><span><strong>Convergence:</strong> Keep exchanging tables until no more updates happen.</span></div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">DV2</div>
+      <div class="prob-q">Network: A-B cost=1, B-C cost=2, A-C cost=7. <strong>Build initial DVR tables</strong> for all routers.</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Initial state:</strong> Each router knows only its directly connected links.</span></div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Router A's table</th><th>Dest</th><th>Cost</th><th>Next hop</th></tr>
+          <tr><td></td><td>A</td><td>0</td><td>—</td></tr>
+          <tr><td></td><td>B</td><td>1</td><td>B</td></tr>
+          <tr><td></td><td>C</td><td>7</td><td>C</td></tr>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Router B's table</th><th>Dest</th><th>Cost</th><th>Next hop</th></tr>
+          <tr><td></td><td>A</td><td>1</td><td>A</td></tr>
+          <tr><td></td><td>B</td><td>0</td><td>—</td></tr>
+          <tr><td></td><td>C</td><td>2</td><td>C</td></tr>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Router C's table</th><th>Dest</th><th>Cost</th><th>Next hop</th></tr>
+          <tr><td></td><td>A</td><td>7</td><td>A</td></tr>
+          <tr><td></td><td>B</td><td>2</td><td>B</td></tr>
+          <tr><td></td><td>C</td><td>0</td><td>—</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">DV3</div>
+      <div class="prob-q">After A receives B's table, <strong>update A's routing table</strong>. (Same network: A-B=1, B-C=2, A-C=7)</div>
+      <div class="prob-badge badge-solved">SOLVED</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>A receives B's table:</strong> B says it can reach C with cost 2.</span></div>
+      <div class="step"><span><strong>A's path to C via B</strong> = cost(A→B) + cost(B→C) = 1 + 2 = <em>3</em></span></div>
+      <div class="step"><span><strong>A's current cost to C = 7 (direct). 3 &lt; 7 → UPDATE.</strong></span></div>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Router A's updated table</th><th>Dest</th><th>Cost</th><th>Next hop</th></tr>
+          <tr><td></td><td>A</td><td>0</td><td>—</td></tr>
+          <tr><td></td><td>B</td><td>1</td><td>B</td></tr>
+          <tr><td></td><td><strong>C</strong></td><td><strong>3</strong></td><td><strong>B</strong></td></tr>
+        </table>
+      </div>
+      <div class="answer-box"><div class="alabel">Key change</div>A now routes to C via B (cost 3) instead of direct (cost 7).</div>
+    </div>
+  </div>
+
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">DV4</div>
+      <div class="prob-q"><strong>Count-to-infinity problem</strong> — what happens when A-B link fails in A-B-C topology?</div>
+      <div class="prob-badge badge-trick">TRICK</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="step"><span><strong>Setup:</strong> A-B cost=1, B-C cost=1. Optimal: A→C via B = cost 2. B→C = cost 1.</span></div>
+      <div class="step"><span><strong>A-B link fails.</strong> A sets D(A,B)=∞, D(A,C)=∞.</span></div>
+      <div class="step"><span><strong>B still has table showing A can reach C with cost 2.</strong> B computes: D(B,C) via A = 1 + 2 = 3. B updates to cost 3 via A. (But A→C is already broken!)</span></div>
+      <div class="step"><span><strong>A receives B's update.</strong> A sees B says it can reach C at cost 3. A sets D(A,C) = 1+3 = 4. Now B gets A's update and sets its cost to 5... and so on → count-to-infinity loop.</span></div>
+      <div class="warn-box"><strong>Solutions:</strong> Split horizon (don't advertise a route back to the neighbor you learned it from). Poison reverse (advertise ∞ back). Route poisoning + holddown timers. These limit but don't fully solve the problem.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════════
+     QUICK REFERENCE SHEET
+═══════════════════════════════════════════════ -->
+<div class="divider">QUICK REFERENCE — ALL FORMULAS</div>
+<div class="topic-block">
+  <div class="topic-header" style="background:rgba(251,191,36,0.06); border-color:rgba(251,191,36,0.3);">
+    <div class="topic-icon">★</div>
+    <div class="topic-title">Master Formula Sheet</div>
+    <div class="topic-count">Everything in one place</div>
+  </div>
+  <div class="prob-card">
+    <div class="prob-head" onclick="tog(this)">
+      <div class="prob-num">★</div>
+      <div class="prob-q">All formulas — open for the complete cheat sheet</div>
+      <div class="prob-badge badge-concept">REFERENCE</div>
+      <div class="toggle-arrow">▼</div>
+    </div>
+    <div class="prob-body">
+      <div class="table-wrap">
+        <table>
+          <tr><th>Category</th><th>Formula</th><th>Notes</th></tr>
+          <tr><td><strong>Tt</strong></td><td>L / B</td><td>L in bits, B in bps</td></tr>
+          <tr><td><strong>Tp</strong></td><td>D / V</td><td>D = distance, V = speed</td></tr>
+          <tr><td><strong>RTT</strong></td><td>2 × Tp</td><td>Round trip time</td></tr>
+          <tr><td><strong>a</strong></td><td>Tp / Tt</td><td>Propagation-to-transmission ratio</td></tr>
+          <tr><td><strong>S&W efficiency</strong></td><td>1 / (1 + 2a)</td><td>Window = 1</td></tr>
+          <tr><td><strong>GBN / SR efficiency</strong></td><td>N / (1 + 2a)</td><td>N = window size</td></tr>
+          <tr><td><strong>Throughput</strong></td><td>η × B</td><td>Effective bits per second</td></tr>
+          <tr><td><strong>GBN min seq nums</strong></td><td>N + 1</td><td>Sender=N, Receiver=1</td></tr>
+          <tr><td><strong>SR min seq nums</strong></td><td>2N</td><td>Both windows = N</td></tr>
+          <tr><td><strong>SR window (n-bit field)</strong></td><td>2^(n-1)</td><td>GBN window = 2^n − 1</td></tr>
+          <tr><td><strong>Baud rate</strong></td><td>S = cN/r</td><td>c=case factor, r=data/signal</td></tr>
+          <tr><td><strong>Nyquist</strong></td><td>2B × log₂(L)</td><td>Noiseless channel</td></tr>
+          <tr><td><strong>Shannon</strong></td><td>B × log₂(1+SNR)</td><td>Noisy channel</td></tr>
+          <tr><td><strong>IPv4 addresses</strong></td><td>2^(32-n)</td><td>/n prefix</td></tr>
+          <tr><td><strong>Usable hosts</strong></td><td>2^(32-n) − 2</td><td>Subtract network+broadcast</td></tr>
+          <tr><td><strong>Subnets from network</strong></td><td>2^(borrowed bits)</td><td>borrowed = new prefix − old prefix</td></tr>
+          <tr><td><strong>Header size</strong></td><td>HLEN × 4 bytes</td><td>Min=20, Max=60</td></tr>
+          <tr><td><strong>Options bytes</strong></td><td>(HLEN × 4) − 20</td><td>Zero if HLEN=5</td></tr>
+          <tr><td><strong>Data bytes</strong></td><td>Total Length − (HLEN×4)</td><td>—</td></tr>
+          <tr><td><strong>Fragment first byte</strong></td><td>Offset × 8</td><td>Offset in 8-byte units</td></tr>
+          <tr><td><strong>Fragment last byte</strong></td><td>First byte + data − 1</td><td>data = TL − header</td></tr>
+          <tr><td><strong>Num fragments</strong></td><td>⌈ total_data / (MTU−20) ⌉</td><td>Ceiling division</td></tr>
+          <tr><td><strong>Hamming distance</strong></td><td>XOR → count 1s</td><td>—</td></tr>
+          <tr><td><strong>Detect s errors</strong></td><td>d_min ≥ s + 1</td><td>—</td></tr>
+          <tr><td><strong>Correct t errors</strong></td><td>d_min ≥ 2t + 1</td><td>—</td></tr>
+          <tr><td><strong>CRC bits = r</strong></td><td>len(generator) − 1</td><td>Append r zeros to data</td></tr>
+          <tr><td><strong>Block coding</strong></td><td>n = k + r</td><td>k=data, r=redundant, n=codeword</td></tr>
+          <tr><td><strong>DVR update</strong></td><td>D(x,y) = min{cost(x,v) + D(v,y)}</td><td>Bellman-Ford</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<script>
+function tog(head) {
+  const card = head.parentElement;
+  card.classList.toggle('open');
+}
+// Open all solved problems by default on load
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.prob-card').forEach(c => {
+    const badge = c.querySelector('.prob-badge');
+    if (badge && badge.classList.contains('badge-concept')) c.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
