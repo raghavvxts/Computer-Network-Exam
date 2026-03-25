@@ -3,1194 +3,707 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Computer Networks — Complete Study Guide</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Computer Networks — Course Syllabus</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f0f3fa;--s1:#ffffff;--s2:#e8edf7;--s3:#dde3f2;
-  --b1:#c8d0e8;--b2:#aab4d0;--b3:#8898b8;
-  --tx:#0f1623;--mu:#2d3748;--dim:#5a6480;
-  --ac1:#1d4ed8;--ac2:#6d28d9;--ac3:#065f46;--ac4:#92400e;--ac5:#991b1b;--ac6:#0e7490;--ac7:#c2410c;
+  --bg:#f7f8fc;
+  --white:#ffffff;
+  --s2:#f0f3fa;
+  --b1:#dde3f0;
+  --b2:#c4cfe4;
+  --tx:#0f1623;
+  --mu:#374151;
+  --dim:#6b7280;
+  --navy:#0f2557;
+  --blue:#1d4ed8;
+  --purple:#6d28d9;
+  --green:#065f46;
+  --amber:#92400e;
+  --red:#991b1b;
+  --teal:#0e7490;
+  --orange:#c2410c;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:20px;line-height:1.9;}
+body{background:var(--bg);color:var(--tx);font-family:'Plus Jakarta Sans',sans-serif;font-size:16px;line-height:1.8;}
 
-/* ── STICKY TOP BAR WITH TIMER ── */
-#topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:10px 36px;
-  gap:20px;
-  background:#ffffff;
-  border-bottom:2px solid var(--b1);
-}
-#topbar-title{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:13px;
-  font-weight:700;
-  color:var(--dim);
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  white-space:nowrap;
-}
-#topbar-title strong{color:var(--ac1);}
-#timer-widget{
-  display:flex;
-  align-items:center;
+/* ─── TOP BAR ─── */
+.topbar{
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 48px;
   gap:16px;
-  background:#fffbf0;
-  border:2px solid #f5d77a;
-  border-radius:12px;
-  padding:10px 20px;
-  flex-shrink:0;
 }
-.timer-label{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;font-weight:700;white-space:nowrap;}
-.timer-row{display:flex;gap:6px;align-items:center;}
-.timer-seg{text-align:center;min-width:44px;}
-.timer-num{font-family:'IBM Plex Mono',monospace;font-size:28px;font-weight:800;color:#92400e;line-height:1;display:block;}
-.timer-unit{font-size:10px;color:var(--dim);letter-spacing:.06em;display:block;margin-top:2px;font-weight:600;}
-.timer-sep{font-family:'IBM Plex Mono',monospace;font-size:22px;color:#d97706;font-weight:700;padding-bottom:12px;}
-.timer-date{font-family:'IBM Plex Mono',monospace;font-size:11px;color:#92400e;font-weight:600;white-space:nowrap;padding-left:8px;border-left:2px solid #f5d77a;}
-#timer-widget.urgent .timer-num{color:#991b1b;}
-#timer-widget.urgent{background:#fff5f5;border-color:#fca5a5;}
-#timer-widget.very-urgent{background:#fef2f2;border-color:#ef4444;}
+.topbar-left{color:rgba(255,255,255,.7);font-size:13px;font-family:'IBM Plex Mono',monospace;letter-spacing:.06em;}
+.topbar-left strong{color:#fff;}
+.topbar-right{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  border-radius:8px;padding:6px 14px;
+}
+.topbar-right .tnum{font-family:'IBM Plex Mono',monospace;font-size:18px;font-weight:700;color:#fcd34d;}
+.topbar-right .tsep{font-family:'IBM Plex Mono',monospace;font-size:16px;color:rgba(255,255,255,.4);padding:0 2px;}
+.topbar-right .tu{font-size:9px;color:rgba(255,255,255,.5);display:block;letter-spacing:.06em;text-align:center;margin-top:1px;}
+.topbar-right .tdate{font-size:11px;color:#fcd34d;font-family:'IBM Plex Mono',monospace;margin-left:10px;padding-left:10px;border-left:1px solid rgba(255,255,255,.2);}
 
-/* ── HEADER ── */
-header{
-  background:linear-gradient(160deg,#0f2557 0%,#1e40af 55%,#0f2557 100%);
-  border-bottom:3px solid #0f2557;
-  padding:70px 50px 56px;position:relative;overflow:hidden;
+/* ─── COVER ─── */
+.cover{
+  background:linear-gradient(160deg,#0a1a40 0%,#1e40af 50%,#0a1a40 100%);
+  padding:72px 48px 60px;
+  position:relative;overflow:hidden;
 }
-header::before{
-  content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);
-  width:1000px;height:500px;
-  background:radial-gradient(ellipse,rgba(255,255,255,.07) 0%,transparent 70%);
+.cover::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 800px 400px at 50% 60%,rgba(255,255,255,.06) 0%,transparent 70%);
   pointer-events:none;
 }
-.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:24px;margin-bottom:22px;
-  font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.07em;text-transform:uppercase;
-  background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;font-weight:600;}
-.chip::before{content:'◆';font-size:10px;}
-h1{font-size:clamp(40px,5vw,66px);font-weight:800;color:#fff;line-height:1.08;margin-bottom:16px;}
-h1 em{font-style:normal;color:#93c5fd;}
-.sub{font-size:20px;color:rgba(255,255,255,.85);margin-bottom:32px;font-weight:400;}
-.topic-bar{display:flex;flex-wrap:wrap;gap:10px;}
-.tb{padding:10px 18px;border-radius:8px;font-size:14px;font-family:'IBM Plex Mono',monospace;
-  letter-spacing:.04em;border:1px solid;cursor:pointer;text-decoration:none;transition:opacity .15s;font-weight:600;}
-.tb:hover{opacity:.75;}
-.c1{color:#3b82f6;border-color:rgba(59,130,246,.45);background:rgba(59,130,246,.12);}
-.c2{color:#a855f7;border-color:rgba(168,85,247,.45);background:rgba(168,85,247,.12);}
-.c3{color:#10b981;border-color:rgba(16,185,129,.45);background:rgba(16,185,129,.12);}
-.c4{color:#f59e0b;border-color:rgba(245,158,11,.45);background:rgba(245,158,11,.12);}
-.c5{color:#ef4444;border-color:rgba(239,68,68,.45);background:rgba(239,68,68,.12);}
-.c6{color:#06b6d4;border-color:rgba(6,182,212,.45);background:rgba(6,182,212,.12);}
-.c7{color:#f97316;border-color:rgba(249,115,22,.45);background:rgba(249,115,22,.12);}
-
-/* ── LAYOUT — truly full width ── */
-.wrap{width:100%;padding:0 48px 120px;}
-
-/* ── CHAPTER ── */
-.chapter{margin:52px 0 0;}
-.ch-head{
-  display:flex;align-items:center;gap:20px;
-  padding:26px 36px;
-  border-radius:16px 16px 0 0;
-  border:2px solid;border-bottom:none;
-  cursor:pointer;user-select:none;transition:filter .15s;
+.cover-inner{position:relative;max-width:800px;}
+.cover-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+  border-radius:20px;padding:5px 14px;margin-bottom:20px;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#fff;
 }
-.ch-head:hover{filter:brightness(0.97);}
-.ch-icon{font-size:30px;width:44px;text-align:center;flex-shrink:0;}
-.ch-title{font-size:24px;font-weight:800;color:#0f1e50;flex:1;}
-.ch-badge{font-family:'IBM Plex Mono',monospace;font-size:13px;padding:6px 14px;border-radius:6px;border:1px solid;letter-spacing:.05em;font-weight:700;}
-.ch-arrow{color:var(--dim);transition:transform .2s;flex-shrink:0;font-size:18px;}
-.chapter.open .ch-arrow{transform:rotate(180deg);}
-.ch-body{display:none;border:2px solid;border-top:none;border-radius:0 0 16px 16px;padding:44px 48px;background:var(--s1);}
-.chapter.open .ch-body{display:block;}
+.cover h1{
+  font-family:'Instrument Serif',serif;
+  font-size:clamp(36px,5vw,60px);
+  color:#fff;line-height:1.1;margin-bottom:10px;
+}
+.cover h1 em{font-style:italic;color:#93c5fd;}
+.cover-sub{font-size:17px;color:rgba(255,255,255,.75);margin-bottom:32px;max-width:600px;}
+.cover-meta{display:flex;flex-wrap:wrap;gap:24px;}
+.cmeta{display:flex;align-items:center;gap:8px;}
+.cmeta-label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.07em;font-family:'IBM Plex Mono',monospace;}
+.cmeta-val{font-size:14px;color:#fff;font-weight:600;}
 
-/* ── CONTENT INSIDE CHAPTERS ── */
-h2.sec{font-size:16px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;margin:44px 0 18px;padding-bottom:10px;border-bottom:3px solid var(--b1);}
-h2.sec:first-child{margin-top:0;}
-.def{background:var(--s2);border-left:6px solid var(--ac1);border-radius:0 12px 12px 0;padding:22px 28px;margin:20px 0;font-size:19px;}
-.def .def-term{font-weight:800;color:#1d4ed8;margin-bottom:8px;font-size:15px;text-transform:uppercase;letter-spacing:.06em;}
-.def p{color:var(--mu);margin:0;line-height:1.9;}
-.def p strong{color:var(--tx);font-weight:700;}
-.def-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(380px,1fr));gap:18px;margin:18px 0;}
-.note{background:rgba(217,119,6,.07);border:2px solid rgba(217,119,6,.28);border-radius:12px;padding:20px 24px;margin:24px 0;font-size:18px;color:var(--mu);}
-.note strong{color:#92400e;}
-.note::before{content:'⚠ ';color:#92400e;font-size:20px;}
-.tip{background:rgba(5,150,105,.06);border:2px solid rgba(5,150,105,.28);border-radius:12px;padding:20px 24px;margin:24px 0;font-size:18px;color:var(--mu);}
-.tip strong{color:#065f46;}
-.tip::before{content:'★ ';color:#065f46;font-size:20px;}
-ul.pts{list-style:none;margin:16px 0;}
-ul.pts li{padding:12px 0 12px 32px;position:relative;font-size:19px;color:var(--mu);border-bottom:1px solid var(--b1);line-height:1.8;}
-ul.pts li:last-child{border-bottom:none;}
-ul.pts li::before{content:'›';position:absolute;left:0;color:#6d28d9;font-size:26px;line-height:1.3;}
-ul.pts li strong{color:var(--tx);font-weight:700;}
-.tbl-wrap{overflow-x:auto;margin:22px 0;}
-table{width:100%;border-collapse:collapse;font-size:17px;}
-th{background:#dce4f5;color:#1e3a6e;font-family:'IBM Plex Mono',monospace;font-size:14px;text-transform:uppercase;letter-spacing:.06em;padding:16px 22px;text-align:left;border-bottom:3px solid var(--b2);font-weight:700;}
-td{padding:16px 22px;border-bottom:1px solid var(--b1);color:var(--mu);vertical-align:top;line-height:1.75;}
-td strong{color:var(--tx);font-weight:700;}
-tr:last-child td{border-bottom:none;}
-tr:hover td{background:rgba(29,78,216,.03);}
-.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin:22px 0;}
-.fbox{background:var(--s2);border:2px solid var(--b2);border-left:6px solid #b45309;border-radius:0 10px 10px 0;padding:18px 22px;}
-.fl{font-size:14px;color:var(--dim);margin-bottom:7px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;}
-.fv{font-family:'IBM Plex Mono',monospace;font-size:20px;color:#92400e;font-weight:700;}
-.fd{font-size:15px;color:var(--dim);margin-top:5px;}
-code{font-family:'IBM Plex Mono',monospace;font-size:18px;background:var(--s2);color:#92400e;padding:3px 9px;border-radius:5px;font-weight:600;}
-.cb{background:#1a2540;border:2px solid #2d3f60;border-radius:12px;padding:24px 28px;margin:18px 0;font-family:'IBM Plex Mono',monospace;font-size:17px;color:#e8edf8;line-height:2.2;overflow-x:auto;}
-.cb .hi{color:#4ade80;font-weight:700;}
-.cb .lo{color:#6b7fa0;}
-.cb .eq{color:#fbbf24;}
-.ans-box{background:rgba(5,150,105,.07);border:2px solid rgba(5,150,105,.3);border-radius:10px;padding:18px 24px;margin:18px 0;font-family:'IBM Plex Mono',monospace;font-size:18px;color:#065f46;font-weight:700;}
-.ans-box .al{font-size:13px;color:var(--dim);font-family:'Plus Jakarta Sans',sans-serif;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;}
+/* ─── LAYOUT ─── */
+.page{width:100%;padding:0 48px 80px;}
 
-/* ── COLLAPSIBLE SOLVED PROBLEMS ── */
-.prob{background:var(--s2);border:2px solid var(--b1);border-radius:12px;margin:18px 0;overflow:hidden;}
-.prob-h{display:flex;align-items:flex-start;gap:18px;padding:20px 24px;cursor:pointer;user-select:none;transition:background .1s;}
-.prob-h:hover{background:rgba(29,78,216,.04);}
-.pnum{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#9ca3af;min-width:34px;margin-top:4px;font-weight:700;}
-.pq{font-size:19px;color:var(--tx);flex:1;font-weight:700;line-height:1.6;}
-.pbadge{font-family:'IBM Plex Mono',monospace;font-size:13px;padding:5px 12px;border-radius:6px;white-space:nowrap;margin-top:2px;flex-shrink:0;font-weight:700;}
-.bs{background:rgba(5,150,105,.1);color:#065f46;border:2px solid rgba(5,150,105,.3);}
-.bp{background:rgba(217,119,6,.1);color:#92400e;border:2px solid rgba(217,119,6,.3);}
-.bc{background:rgba(29,78,216,.1);color:#1d4ed8;border:2px solid rgba(29,78,216,.25);}
-.parr{color:#9ca3af;font-size:16px;margin-top:4px;transition:transform .2s;flex-shrink:0;}
-.prob.open .parr{transform:rotate(180deg);}
-.prob-b{display:none;padding:0 24px 24px 76px;border-top:2px solid var(--b1);}
-.prob.open .prob-b{display:block;}
-.step{display:flex;gap:14px;padding:12px 0;font-size:18px;color:var(--mu);border-bottom:1px solid var(--b1);line-height:1.8;}
-.step:last-child{border-bottom:none;}
-.step::before{content:'▸';color:#6d28d9;flex-shrink:0;margin-top:2px;font-size:20px;font-weight:700;}
-.step strong{color:var(--tx);font-weight:700;}
+/* ─── SECTION HEADER ─── */
+.sec-divider{
+  display:flex;align-items:center;gap:16px;
+  margin:52px 0 28px;
+}
+.sec-divider-line{flex:1;height:2px;background:var(--b1);}
+.sec-divider-label{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--dim);white-space:nowrap;font-weight:600;
+}
 
-/* ── SECTION DIVIDER ── */
-.sdiv{display:flex;align-items:center;gap:20px;margin:48px 0 0;color:var(--b3);font-family:'IBM Plex Mono',monospace;font-size:14px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;}
-.sdiv::before,.sdiv::after{content:'';flex:1;height:2px;background:var(--b1);}
+/* ─── OVERVIEW CARDS ─── */
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:8px;}
+.ov-card{
+  background:var(--white);border:1px solid var(--b1);border-radius:12px;
+  padding:20px 22px;
+}
+.ov-card-icon{font-size:24px;margin-bottom:10px;}
+.ov-card-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.07em;font-family:'IBM Plex Mono',monospace;margin-bottom:4px;font-weight:600;}
+.ov-card-val{font-size:17px;color:var(--tx);font-weight:700;}
 
-@media(max-width:900px){
-  .wrap{padding:0 24px 80px;}
-  #topbar{padding:10px 20px;gap:12px;}
-  #topbar-title{display:none;}
-  #timer-widget{padding:8px 14px;gap:10px;}
-  .timer-num{font-size:22px;}
-  .ch-body{padding:28px 24px;}
-  .prob-b{padding-left:24px;}
-  .fgrid .fbox{min-width:100%;}
-  .def-grid{grid-template-columns:1fr;}
-  header{padding:48px 28px 38px;}
-  .ch-head{padding:20px 24px;}
-  .ch-title{font-size:20px;}
+/* ─── MODULE TABLE ─── */
+.module-list{display:flex;flex-direction:column;gap:0;}
+.module-row{
+  display:grid;
+  grid-template-columns:60px 1fr 180px 120px;
+  gap:0;
+  background:var(--white);
+  border:1px solid var(--b1);
+  border-top:none;
+  transition:background .1s;
+}
+.module-row:first-child{border-top:1px solid var(--b1);border-radius:12px 12px 0 0;}
+.module-row:last-child{border-radius:0 0 12px 12px;}
+.module-row:hover{background:rgba(29,78,216,.02);}
+.module-row.header-row{
+  background:#1e3a6e;border:1px solid #1e3a6e;border-radius:12px 12px 0 0;
+}
+.module-row.header-row .mc{color:rgba(255,255,255,.6);font-size:11px;font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.07em;font-weight:700;padding:12px 20px;}
+.mc{padding:16px 20px;font-size:15px;color:var(--mu);border-right:1px solid var(--b1);display:flex;align-items:flex-start;}
+.mc:last-child{border-right:none;}
+.mc.num{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--dim);font-weight:700;justify-content:center;padding-top:18px;}
+.mc.topic{flex-direction:column;gap:4px;}
+.mc.topic .topic-name{font-size:16px;font-weight:700;color:var(--tx);}
+.mc.topic .topic-sub{font-size:13px;color:var(--dim);line-height:1.5;}
+.mc.tags{flex-wrap:wrap;gap:5px;align-content:flex-start;}
+.mc.imp{justify-content:center;align-items:flex-start;padding-top:18px;}
+.tag{font-size:11px;font-family:'IBM Plex Mono',monospace;padding:3px 8px;border-radius:4px;border:1px solid;white-space:nowrap;font-weight:600;}
+.tag-b{color:#1d4ed8;border-color:rgba(29,78,216,.3);background:rgba(29,78,216,.08);}
+.tag-p{color:#6d28d9;border-color:rgba(109,40,217,.3);background:rgba(109,40,217,.08);}
+.tag-g{color:#065f46;border-color:rgba(6,95,70,.3);background:rgba(6,95,70,.08);}
+.tag-a{color:#92400e;border-color:rgba(146,64,14,.3);background:rgba(146,64,14,.08);}
+.tag-r{color:#991b1b;border-color:rgba(153,27,27,.3);background:rgba(153,27,27,.08);}
+.tag-t{color:#0e7490;border-color:rgba(14,116,144,.3);background:rgba(14,116,144,.08);}
+.tag-o{color:#c2410c;border-color:rgba(194,65,12,.3);background:rgba(194,65,12,.08);}
+.imp-badge{
+  font-size:11px;font-family:'IBM Plex Mono',monospace;padding:4px 10px;border-radius:6px;font-weight:700;
+}
+.imp-high{background:#fef2f2;color:#991b1b;border:1px solid rgba(153,27,27,.25);}
+.imp-med{background:#fffbf0;color:#92400e;border:1px solid rgba(146,64,14,.2);}
+.imp-low{background:#f0fdf4;color:#065f46;border:1px solid rgba(6,95,70,.2);}
+
+/* ─── TOPICS BREAKDOWN ─── */
+.topics-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;}
+.topic-card{background:var(--white);border:1px solid var(--b1);border-radius:12px;overflow:hidden;}
+.topic-card-head{
+  padding:16px 20px;
+  display:flex;align-items:center;gap:12px;
+}
+.topic-card-num{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-weight:700;flex-shrink:0;
+}
+.topic-card-title{font-size:15px;font-weight:700;color:var(--tx);flex:1;}
+.topic-card-body{padding:0 20px 16px;}
+.topic-item{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:7px 0;border-bottom:1px solid var(--b1);
+  font-size:14px;color:var(--mu);line-height:1.5;
+}
+.topic-item:last-child{border-bottom:none;}
+.topic-item::before{content:'›';color:var(--dim);flex-shrink:0;margin-top:1px;font-size:16px;}
+.topic-item strong{color:var(--tx);font-weight:600;}
+
+/* ─── EXAM FORMAT ─── */
+.exam-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.exam-card{background:var(--white);border:1px solid var(--b1);border-radius:12px;padding:24px 26px;}
+.exam-card-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--dim);margin-bottom:16px;font-family:'IBM Plex Mono',monospace;}
+.exam-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--b1);font-size:15px;}
+.exam-row:last-child{border-bottom:none;}
+.exam-row-label{color:var(--mu);}
+.exam-row-val{font-weight:700;color:var(--tx);}
+.score-bar{margin-top:16px;}
+.score-bar-label{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:6px;font-family:'IBM Plex Mono',monospace;}
+.score-bar-track{height:10px;background:var(--s2);border-radius:99px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:99px;}
+
+/* ─── IMPORTANT TOPICS ─── */
+.imp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.imp-section{background:var(--white);border:1px solid var(--b1);border-radius:12px;padding:20px 22px;}
+.imp-section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:14px;font-family:'IBM Plex Mono',monospace;display:flex;align-items:center;gap:8px;}
+.imp-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--b1);font-size:14px;color:var(--mu);}
+.imp-item:last-child{border-bottom:none;}
+.imp-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+
+/* ─── FORMULA CHEAT CARD ─── */
+.formula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+.fcard{background:var(--white);border:1px solid var(--b1);border-left:4px solid #b45309;border-radius:0 10px 10px 0;padding:14px 18px;}
+.fcard-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:6px;font-family:'IBM Plex Mono',monospace;}
+.fcard-val{font-family:'IBM Plex Mono',monospace;font-size:17px;font-weight:700;color:#92400e;}
+.fcard-desc{font-size:12px;color:var(--dim);margin-top:4px;}
+
+/* ─── FOOTER ─── */
+footer{
+  background:var(--navy);color:rgba(255,255,255,.5);
+  text-align:center;padding:28px 48px;
+  font-size:13px;font-family:'IBM Plex Mono',monospace;
+  letter-spacing:.04em;
+}
+footer strong{color:rgba(255,255,255,.85);}
+
+/* ─── PRINT ─── */
+@media print{
+  .topbar{display:none;}
+  body{font-size:13px;}
+  .cover{padding:40px 36px;}
+  .page{padding:0 36px 40px;}
+}
+@media(max-width:700px){
+  .cover,.page,.topbar{padding-left:20px;padding-right:20px;}
+  .module-row{grid-template-columns:40px 1fr;}.mc.tags,.mc.imp{display:none;}
+  .exam-grid,.imp-grid{grid-template-columns:1fr;}
+  .topics-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
 <body>
 
-<!-- ── STICKY TOP BAR ── -->
-<div id="topbar">
-  <div id="topbar-title">📡 <strong>CN</strong> Complete Study Guide</div>
-  <div id="timer-widget">
-    <div class="timer-label">⏱ Exam in</div>
-    <div class="timer-row">
-      <div class="timer-seg"><span class="timer-num" id="td">--</span><span class="timer-unit">days</span></div>
-      <div class="timer-sep">:</div>
-      <div class="timer-seg"><span class="timer-num" id="th">--</span><span class="timer-unit">hrs</span></div>
-      <div class="timer-sep">:</div>
-      <div class="timer-seg"><span class="timer-num" id="tm">--</span><span class="timer-unit">min</span></div>
-      <div class="timer-sep">:</div>
-      <div class="timer-seg"><span class="timer-num" id="ts">--</span><span class="timer-unit">sec</span></div>
+<!-- TOP BAR WITH LIVE TIMER -->
+<div class="topbar">
+  <div class="topbar-left"><strong>Bennett University</strong> · School of CSE&T · Computer Networks</div>
+  <div class="topbar-right">
+    <span style="font-size:11px;color:rgba(255,255,255,.6);font-family:'IBM Plex Mono',monospace;margin-right:6px;">EXAM IN</span>
+    <div style="display:flex;align-items:flex-end;gap:4px;">
+      <div style="text-align:center;"><span class="tnum" id="td">--</span><span class="tu">days</span></div>
+      <span class="tsep">:</span>
+      <div style="text-align:center;"><span class="tnum" id="th">--</span><span class="tu">hrs</span></div>
+      <span class="tsep">:</span>
+      <div style="text-align:center;"><span class="tnum" id="tm">--</span><span class="tu">min</span></div>
+      <span class="tsep">:</span>
+      <div style="text-align:center;"><span class="tnum" id="ts">--</span><span class="tu">sec</span></div>
     </div>
-    <div class="timer-date">Mar 26 · 10:30 AM</div>
+    <span class="tdate">Mar 26 · 10:30 AM</span>
   </div>
 </div>
 
-<header>
-  <div style="padding-top:0;padding-bottom:0;width:100%;padding-left:50px;padding-right:320px;">
-    <div class="chip">CN Complete Guide · All Topics</div>
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-tag">📡 Course Syllabus</div>
     <h1>Computer <em>Networks</em></h1>
-    <p class="sub">Every concept, definition & explanation from your syllabus — start from zero, be exam-ready</p>
-    <div class="topic-bar">
-      <a class="tb c1" href="#ch1">Intro & Basics</a>
-      <a class="tb c2" href="#ch2">Devices & Topologies</a>
-      <a class="tb c3" href="#ch3">OSI & TCP/IP Models</a>
-      <a class="tb c5" href="#ch4">Physical Layer</a>
-      <a class="tb c1" href="#ch5">Data Link Layer</a>
-      <a class="tb c2" href="#ch6">Error Detection & CRC</a>
-      <a class="tb c4" href="#ch7">Flow Control & ARQ</a>
-      <a class="tb c7" href="#ch8">Ethernet & Bluetooth</a>
-      <a class="tb c3" href="#ch9">Wi-Fi / WLAN</a>
-      <a class="tb c6" href="#ch10">IPv4 Addressing</a>
-      <a class="tb c4" href="#ch11">IPv4 Datagram</a>
-      <a class="tb c5" href="#ch12">Network Protocols</a>
-      <a class="tb c1" href="#ch13">Routing</a>
-      <a class="tb c4" href="#ch14">★ Numericals</a>
-    </div>
-  </div>
-</header>
-
-<div class="wrap">
-
-<!-- ════════════════════ CH 1 ════════════════════ -->
-<div class="chapter open" id="ch1">
-  <div class="ch-head" style="background:rgba(37,99,235,.06);border-color:rgba(37,99,235,.2);" onclick="tog(this)">
-    <div class="ch-icon">🌐</div>
-    <div class="ch-title">Chapter 1 — Introduction to Computer Networks</div>
-    <div class="ch-badge c1">BASICS</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(37,99,235,.15);">
-
-    <h2 class="sec" style="color:#1d4ed8">Core Definitions</h2>
-    <div class="def-grid">
-      <div class="def"><div class="def-term">Network</div><p>A set of <strong>devices (nodes)</strong> connected by communication links/channels. A node can be a computer, printer, or any device that can send/receive data.</p></div>
-      <div class="def"><div class="def-term">Computer Network</div><p>A <strong>telecommunication channel</strong> used to share data between connected devices. Best example: the <strong>Internet</strong>.</p></div>
-      <div class="def"><div class="def-term">Data Communication</div><p>The <strong>exchange of data</strong> between two devices through a transmission medium (wire, fiber, or wireless).</p></div>
-      <div class="def"><div class="def-term">Protocol</div><p>A set of <strong>rules and conventions</strong> that govern how data is transmitted between devices in a network.</p></div>
-    </div>
-
-    <h2 class="sec" style="color:#1d4ed8">Network Criteria — What Makes a Good Network?</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Criterion</th><th>What It Means</th><th>How It's Measured</th></tr>
-      <tr><td><strong>Performance</strong></td><td>How fast and efficiently data is delivered</td><td>Transit time (message A→B), Response time (query→response)</td></tr>
-      <tr><td><strong>Reliability</strong></td><td>How dependable the network is</td><td>Frequency of failure, recovery speed, robustness during disasters</td></tr>
-      <tr><td><strong>Scalability</strong></td><td>Ability to grow or shrink</td><td>Can add more nodes/links without redesigning</td></tr>
-      <tr><td><strong>Security</strong></td><td>Protecting data from unauthorized access</td><td>Firewalls, encryption, access controls</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#1d4ed8">Data Communication Effectiveness</h2>
-    <ul class="pts">
-      <li><strong>Delivery:</strong> Data must reach the correct destination — not any device, the right one.</li>
-      <li><strong>Timeliness:</strong> Data must arrive on time. Late video stream = useless. Real-time apps need this.</li>
-      <li><strong>Accuracy:</strong> Data must arrive unchanged. Even a single flipped bit can corrupt a file.</li>
-    </ul>
-
-    <h2 class="sec" style="color:#1d4ed8">Connection Types</h2>
-    <div class="def-grid">
-      <div class="def"><div class="def-term">Point-to-Point</div><p>A <strong>dedicated link</strong> between exactly two devices. All capacity is reserved for just those two. Example: a cable from laptop to monitor.</p></div>
-      <div class="def"><div class="def-term">Multipoint (Multi-drop)</div><p>A <strong>single link shared</strong> among multiple devices — either <strong>spatially shared</strong> (all at once) or <strong>time-shared</strong> (taking turns).</p></div>
-    </div>
-
-    <h2 class="sec" style="color:#1d4ed8">Transmission Modes — Direction of Data Flow</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Mode</th><th>Direction</th><th>Real-world Example</th></tr>
-      <tr><td><strong>Simplex</strong></td><td>One way ONLY, permanently</td><td>TV broadcast, keyboard→monitor, radio</td></tr>
-      <tr><td><strong>Half-Duplex</strong></td><td>Both directions, but NOT simultaneously</td><td>Walkie-talkie — press to talk, release to listen</td></tr>
-      <tr><td><strong>Full-Duplex</strong></td><td>Both directions simultaneously</td><td>Telephone, Skype, video call</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#1d4ed8">Transmission Media</h2>
-    <ul class="pts">
-      <li><strong>Guided (Wired):</strong> Signal is confined inside the medium. Includes twisted pair, coaxial cable, fiber optic.</li>
-      <li><strong>Unguided (Wireless):</strong> Signal travels through air/space. Includes radio waves, microwave, infrared.</li>
-    </ul>
-    <div class="tbl-wrap"><table>
-      <tr><th>Media</th><th>Type</th><th>Speed / Notes</th><th>Pros / Cons</th></tr>
-      <tr><td><strong>UTP</strong> (Cat-5/5e/6)</td><td>Guided</td><td>Up to 1 Gbps; RJ45 connector</td><td>Cheap, easy install; limited by attenuation over distance</td></tr>
-      <tr><td><strong>STP</strong></td><td>Guided</td><td>Higher speeds than UTP</td><td>Better noise immunity; expensive, bulky</td></tr>
-      <tr><td><strong>Coaxial</strong></td><td>Guided</td><td>10Base2 (thin), 10Base5 (thick)</td><td>Better shielding; legacy technology</td></tr>
-      <tr><td><strong>Fiber Optic</strong></td><td>Guided</td><td>Up to 450 Mbps+; light signals</td><td>Immune to EMI, very fast, expensive; singlemode/multimode</td></tr>
-      <tr><td><strong>Wireless</strong></td><td>Unguided</td><td>Varies by standard</td><td>Mobile, no cables; interference, lower security</td></tr>
-    </table></div>
-    <div class="tip"><strong>Remember:</strong> UTP categories — Cat-5 (100 Mbps), Cat-5e (1 Gbps), Cat-6 (10 Gbps short range). All use RJ45 connectors. STP adds a metal jacket for shielding.</div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 2 ════════════════════ -->
-<div class="chapter" id="ch2">
-  <div class="ch-head" style="background:rgba(124,58,237,.05);border-color:rgba(124,58,237,.18);" onclick="tog(this)">
-    <div class="ch-icon">🔌</div>
-    <div class="ch-title">Chapter 2 — Networking Devices, Types & Topologies</div>
-    <div class="ch-badge c2">DEVICES</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(124,58,237,.12);">
-    <h2 class="sec" style="color:#6d28d9">Networking Devices</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Device</th><th>OSI Layer</th><th>What It Does</th><th>Key Detail</th></tr>
-      <tr><td><strong>NIC</strong></td><td>Data Link (2)</td><td>Connects a host to the network. Has a unique MAC address burned in.</td><td>Every device on a network needs one. MAC = 48-bit, 6-byte address</td></tr>
-      <tr><td><strong>Repeater</strong></td><td>Physical (1)</td><td>Regenerates (amplifies) signals to extend range. No filtering.</td><td>Does NOT make intelligent forwarding decisions</td></tr>
-      <tr><td><strong>Hub</strong></td><td>Physical (1)</td><td>Concentrates connections. Broadcasts all incoming data to all ports.</td><td>Active hub also regenerates signals. Creates single collision domain.</td></tr>
-      <tr><td><strong>Bridge</strong></td><td>Data Link (2)</td><td>Connects two LAN segments. Filters by MAC address.</td><td>2-port device. Reads source MAC to build table. Connects same-protocol LANs.</td></tr>
-      <tr><td><strong>Switch</strong></td><td>Data Link (2)</td><td>Multi-port bridge with buffer. Forwards only to correct destination port.</td><td>Uses CAM (MAC address) table. Checks for errors before forwarding. Divides collision domains.</td></tr>
-      <tr><td><strong>Router</strong></td><td>Network (3/4)</td><td>Routes packets between different networks using IP addresses and routing tables.</td><td>Operates on L3 (IP). Makes intelligent forwarding decisions. Used in LAN and WAN.</td></tr>
-      <tr><td><strong>Gateway</strong></td><td>Up to L5</td><td>Connects networks that use different protocols.</td><td>Translates between protocols. Used when networks are fundamentally different.</td></tr>
-      <tr><td><strong>Firewall</strong></td><td>Multiple</td><td>Controls network access. Allows/blocks traffic based on security rules.</td><td>Placed between internal and external networks. Rejects unknown sources.</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#6d28d9">Network Types</h2>
-    <div class="def-grid">
-      <div class="def"><div class="def-term">PAN — Personal Area Network</div><p>Range: room/person (~10m). <strong>Home devices</strong> — phone, laptop, printer connected wirelessly or via modem. Example: Bluetooth, USB.</p></div>
-      <div class="def"><div class="def-term">LAN — Local Area Network</div><p>Range: building/campus. Connects computers via hubs, switches, cables. Modern LANs use wireless access points. Can be split into VLANs.</p></div>
-      <div class="def"><div class="def-term">MAN — Metropolitan Area Network</div><p>Range: city. Interconnects multiple LANs via telephone exchange. Protocols: ATM, Frame Relay, ISDN. Example: bank branches across a city.</p></div>
-      <div class="def"><div class="def-term">WAN — Wide Area Network</div><p>Range: countries/world. Uses fiber optic, satellite, telephone lines. The <strong>Internet is the world's largest WAN</strong>. Used by governments, businesses globally.</p></div>
-    </div>
-
-    <h2 class="sec" style="color:#6d28d9">Network Topologies</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Topology</th><th>Structure</th><th>Advantage</th><th>Disadvantage</th></tr>
-      <tr><td><strong>Bus</strong></td><td>All devices on one shared cable (backbone). Terminators at both ends.</td><td>Cheap; least cable required; easy to expand</td><td>Whole network fails if backbone breaks; slow with heavy traffic</td></tr>
-      <tr><td><strong>Ring</strong></td><td>Devices in a closed loop. Data travels in one direction via tokens.</td><td>Deterministic access; no collisions with token</td><td>One break disrupts entire ring; difficult to troubleshoot</td></tr>
-      <tr><td><strong>Star</strong></td><td>All devices connect to central hub/switch. No direct device-to-device links.</td><td>Easy to manage; fault isolation; failure of one node doesn't affect others</td><td>Central device = single point of failure</td></tr>
-      <tr><td><strong>Mesh</strong></td><td>Every device connects to every other device.</td><td>Most redundant; multiple paths exist</td><td>Very expensive; complex to cable</td></tr>
-      <tr><td><strong>Tree (Hierarchical)</strong></td><td>Star networks connected in a hierarchy. Root → branches → leaves.</td><td>Scalable; easy to add nodes</td><td>Root failure is catastrophic</td></tr>
-      <tr><td><strong>Hybrid</strong></td><td>Combination of two or more topologies.</td><td>Flexible; used in real large networks</td><td>Complex design and management</td></tr>
-    </table></div>
-    <div class="tip"><strong>Exam tip:</strong> Bus topology — cables = N+1, ports = N. Ring uses tokens — a station holds the token while transmitting, then releases it. Star is the most common in modern networks.</div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 3 ════════════════════ -->
-<div class="chapter" id="ch3">
-  <div class="ch-head" style="background:rgba(5,150,105,.05);border-color:rgba(5,150,105,.2);" onclick="tog(this)">
-    <div class="ch-icon">📋</div>
-    <div class="ch-title">Chapter 3 — OSI Model & TCP/IP Model</div>
-    <div class="ch-badge c3">ARCHITECTURE</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(5,150,105,.12);">
-    <h2 class="sec" style="color:#047857">Why Layered Architecture?</h2>
-    <ul class="pts">
-      <li><strong>Divide and Conquer:</strong> Breaks a complex, unmanageable networking problem into small, solvable pieces.</li>
-      <li><strong>Modularity:</strong> Each layer is independent. Change one layer's implementation without affecting other layers.</li>
-      <li><strong>Easy to test:</strong> Each layer can be analyzed and tested individually — isolate bugs faster.</li>
-      <li><strong>Standardization:</strong> Different vendors can build equipment that works together if they follow the same layer specifications.</li>
-    </ul>
-    <div class="def"><div class="def-term">Key Principle</div><p>Each lower layer <strong>adds its services</strong> to the layer above it. Each layer hides implementation details from the layer above. The purpose is to allow services to flow from lower to higher layers.</p></div>
-
-    <h2 class="sec" style="color:#047857">OSI Model — 7 Layers (Physical to Application)</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>#</th><th>Layer Name</th><th>PDU</th><th>Key Responsibility</th><th>Protocols / Examples</th></tr>
-      <tr><td>7</td><td><strong>Application</strong></td><td>Data</td><td>Interface between user applications and the network. Provides services like file transfer, email, web.</td><td>HTTP, FTP, SMTP, DNS, Telnet</td></tr>
-      <tr><td>6</td><td><strong>Presentation</strong></td><td>Data</td><td>Data translation, encryption/decryption, compression. Makes data readable regardless of format.</td><td>SSL/TLS, JPEG, MPEG, ASCII</td></tr>
-      <tr><td>5</td><td><strong>Session</strong></td><td>Data</td><td>Establishes, manages, and terminates sessions (connections) between applications.</td><td>NetBIOS, RPC, NFS</td></tr>
-      <tr><td>4</td><td><strong>Transport</strong> ❤️</td><td>Segment</td><td>End-to-end data delivery. Segmentation, reassembly, error recovery. Called the <strong>Heart of OSI</strong>.</td><td>TCP (reliable), UDP (fast)</td></tr>
-      <tr><td>3</td><td><strong>Network</strong></td><td>Packet</td><td>Logical addressing (IP addresses). Routing packets across multiple networks. Path determination.</td><td>IP, ICMP, OSPF, RIP</td></tr>
-      <tr><td>2</td><td><strong>Data Link</strong></td><td>Frame</td><td>Physical addressing (MAC). Framing, error control, flow control, access control.</td><td>Ethernet, PPP, ARP</td></tr>
-      <tr><td>1</td><td><strong>Physical</strong></td><td>Bits</td><td>Transmits raw binary (0s and 1s) over a physical medium. Deals with voltages, frequencies, cables.</td><td>IEEE 802.11, RS-232, DSL</td></tr>
-    </table></div>
-
-    <div class="note"><strong>Transport Layer = "Heart of OSI"</strong> — It provides point-to-point connection between source and destination, communicates with Application layer via system calls, segments data from upper layers, and is responsible for complete, reliable data transfer.</div>
-
-    <h2 class="sec" style="color:#047857">TCP/IP (DoD) Model — 4 Layers</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>TCP/IP Layer</th><th>Corresponds to OSI Layers</th><th>What It Does</th></tr>
-      <tr><td><strong>Application</strong></td><td>Application + Presentation + Session (5, 6, 7)</td><td>All user-facing services and data representation</td></tr>
-      <tr><td><strong>Transport (Host-to-Host)</strong></td><td>Transport (4)</td><td>End-to-end reliability, error-free delivery, packet sequencing</td></tr>
-      <tr><td><strong>Internet</strong></td><td>Network (3)</td><td>Logical addressing (IP), routing packets across networks</td></tr>
-      <tr><td><strong>Network Access</strong></td><td>Data Link + Physical (1, 2)</td><td>Hardware addressing, physical transmission, data exchange with network</td></tr>
-    </table></div>
-    <div class="tip"><strong>OSI vs TCP/IP:</strong> OSI is a theoretical reference model (7 layers). TCP/IP is the practical implementation model (4 layers) used in the real Internet. TCP/IP originated from DoD (Department of Defense) research in 1969.</div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 4 ════════════════════ -->
-<div class="chapter" id="ch4">
-  <div class="ch-head" style="background:rgba(220,38,38,.04);border-color:rgba(220,38,38,.18);" onclick="tog(this)">
-    <div class="ch-icon">⚡</div>
-    <div class="ch-title">Chapter 4 — Physical Layer</div>
-    <div class="ch-badge c5">PHY</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(220,38,38,.12);">
-    <div class="def"><div class="def-term">Physical Layer</div><p>The <strong>lowest layer</strong> of the OSI model. Responsible for transmitting raw, unstructured bits over a physical medium. It handles all electrical, optical, and physical aspects — cables, connectors, voltage levels, signal timing, NIC cards.</p></div>
-
-    <h2 class="sec" style="color:#b91c1c">Line Coding</h2>
-    <div class="def"><div class="def-term">What is Line Coding?</div><p>The process of converting <strong>digital data (0s and 1s) into digital signals</strong> for transmission over a wire. The receiver must be able to reconstruct the original bits from the signal.</p></div>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">Baud Rate Formula</div><div class="fv">S = cN / r</div><div class="fd">S=baud, c=case factor, N=bit rate, r=data/signal ratio</div></div>
-      <div class="fbox"><div class="fl">Case Factor c</div><div class="fv">0 ≤ c ≤ 1</div><div class="fd">c=1 worst case, c=0.5 average, c=1 for Manchester always</div></div>
-    </div>
-    <div class="tbl-wrap"><table>
-      <tr><th>Scheme</th><th>Category</th><th>How It Works</th><th>Key Property</th></tr>
-      <tr><td><strong>Unipolar NRZ</strong></td><td>Unipolar</td><td>1 = positive voltage (+V), 0 = zero voltage (0V). Signal stays constant for full bit duration.</td><td>Simple but has DC component. No clock embedded.</td></tr>
-      <tr><td><strong>Unipolar RZ</strong></td><td>Unipolar</td><td>1 = +V for first half, then 0V. Always returns to zero mid-bit.</td><td>Self-clocking but needs double the bandwidth.</td></tr>
-      <tr><td><strong>NRZ-L</strong></td><td>Polar</td><td>Signal <strong>Level</strong> encodes data: 1 = low level, 0 = high level. No transition within bit.</td><td>Simple. No DC component if equal 0s and 1s.</td></tr>
-      <tr><td><strong>NRZ-I</strong></td><td>Polar</td><td><strong>Inversion</strong> on 1: signal inverts at start of each 1. No inversion for 0.</td><td>Better than NRZ-L for long strings of 1s.</td></tr>
-      <tr><td><strong>RZ (Polar)</strong></td><td>Polar</td><td>Uses 3 values: +V, −V, 0. Signal goes to 0 at MID-BIT every time.</td><td>Self-clocking; needs more bandwidth.</td></tr>
-      <tr><td><strong>Manchester</strong></td><td>Polar</td><td>Transition at MID-BIT encodes data. H→L = 1, L→H = 0. Used in <strong>Ethernet</strong>.</td><td>Always has a mid-bit transition — great for clock sync. r=1/2 so baud = 2× bit rate.</td></tr>
-      <tr><td><strong>Differential Manchester</strong></td><td>Polar</td><td>Always a mid-bit transition. BOUNDARY transition at start = 0. No boundary transition = 1.</td><td>More robust to polarity reversal than Manchester.</td></tr>
-      <tr><td><strong>AMI (Bipolar)</strong></td><td>Bipolar</td><td>0 = zero volt. 1s alternate between +V and −V.</td><td>No DC component. A single-level violation = error detected.</td></tr>
-      <tr><td><strong>Pseudoternary</strong></td><td>Bipolar</td><td>Opposite of AMI: 1 = zero volt. 0s alternate +V and −V.</td><td>Same properties as AMI but for 0s.</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#b91c1c">Switching at Physical Layer</h2>
-    <div class="def-grid">
-      <div class="def"><div class="def-term">Ingress</div><p>Data <strong>arriving</strong> on a port of a switch or router.</p></div>
-      <div class="def"><div class="def-term">Egress</div><p>Data <strong>leaving</strong> a port of a switch or router toward its destination.</p></div>
-      <div class="def"><div class="def-term">Circuit Switching</div><p>A <strong>dedicated path</strong> is established before data transfer. Reserved for entire session duration. Example: traditional telephone network.</p></div>
-      <div class="def"><div class="def-term">Packet Switching</div><p>Data broken into <strong>packets</strong> sent independently. Each packet has header with source/destination. Packets may take different paths. Example: Internet.</p></div>
-      <div class="def"><div class="def-term">Message Switching</div><p>Entire message stored at each intermediate node, then forwarded. Store-and-forward mechanism. Older technology.</p></div>
+    <p class="cover-sub">Complete topic outline, module breakdown, exam format, important topics and formula reference — everything you need in one place.</p>
+    <div class="cover-meta">
+      <div class="cmeta"><span class="cmeta-label">Institution</span><span class="cmeta-val">Bennett University, Greater Noida</span></div>
+      <div class="cmeta"><span class="cmeta-label">Department</span><span class="cmeta-val">CSE&T</span></div>
+      <div class="cmeta"><span class="cmeta-label">Total Modules</span><span class="cmeta-val">14</span></div>
+      <div class="cmeta"><span class="cmeta-label">Exam</span><span class="cmeta-val">March 26, 2026 · 10:30 AM</span></div>
+      <div class="cmeta"><span class="cmeta-label">Max Marks</span><span class="cmeta-val">20</span></div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════ CH 5 ════════════════════ -->
-<div class="chapter" id="ch5">
-  <div class="ch-head" style="background:rgba(37,99,235,.06);border-color:rgba(37,99,235,.2);" onclick="tog(this)">
-    <div class="ch-icon">🔗</div>
-    <div class="ch-title">Chapter 5 — Data Link Layer (DLL)</div>
-    <div class="ch-badge c1">DLL</div>
-    <div class="ch-arrow">▼</div>
+<div class="page">
+
+  <!-- OVERVIEW -->
+  <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Course Overview</div><div class="sec-divider-line"></div></div>
+  <div class="overview-grid">
+    <div class="ov-card"><div class="ov-card-icon">📚</div><div class="ov-card-label">Total Topics</div><div class="ov-card-val">14 Modules</div></div>
+    <div class="ov-card"><div class="ov-card-icon">🧮</div><div class="ov-card-label">Numerical Types</div><div class="ov-card-val">8 Categories</div></div>
+    <div class="ov-card"><div class="ov-card-icon">📝</div><div class="ov-card-label">Exam Format</div><div class="ov-card-val">3 × 5-mark + 5 MCQ</div></div>
+    <div class="ov-card"><div class="ov-card-icon">🎯</div><div class="ov-card-label">Total Marks</div><div class="ov-card-val">20 Marks</div></div>
+    <div class="ov-card"><div class="ov-card-icon">🕐</div><div class="ov-card-label">Exam Date</div><div class="ov-card-val">March 26, 2026</div></div>
+    <div class="ov-card"><div class="ov-card-icon">🏛</div><div class="ov-card-label">Mode</div><div class="ov-card-val">Pen · Paper · Written</div></div>
   </div>
-  <div class="ch-body" style="border-color:rgba(37,99,235,.15);">
-    <div class="def"><div class="def-term">Data Link Layer</div><p>Layer 2 of the OSI model. Responsible for <strong>reliable node-to-node delivery</strong> over a single link. It takes packets from the network layer and organizes them into <strong>frames</strong> for transmission. It also handles errors that may occur in the physical layer.</p></div>
 
-    <h2 class="sec" style="color:#1d4ed8">Five Core Services of DLL</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Service</th><th>What It Does</th><th>How</th></tr>
-      <tr><td><strong>Framing</strong></td><td>Converts raw bit stream from physical layer into discrete, recognizable units called <strong>frames</strong>. A frame has header, data payload, and trailer.</td><td>Character count; character/bit stuffing; flags (01111110)</td></tr>
-      <tr><td><strong>Physical Addressing</strong></td><td>Adds <strong>source and destination MAC addresses</strong> to the frame header so the correct device receives it on a local network.</td><td>Ethernet: 6-byte (48-bit) MAC address, 12 hex digits, burned into NIC</td></tr>
-      <tr><td><strong>Flow Control</strong></td><td>Prevents a fast sender from <strong>overwhelming a slow receiver</strong>. Coordinates the rate of data transmission.</td><td>Receiver tells sender to slow down or stop temporarily</td></tr>
-      <tr><td><strong>Error Control</strong></td><td>Detects and/or corrects errors that occurred during transmission. Handles lost, duplicate, and out-of-order frames.</td><td>ACKs, NACKs, timers, sequence numbers, CRC</td></tr>
-      <tr><td><strong>Access Control</strong></td><td>Determines which device has the right to transmit on a <strong>shared medium</strong> at any given time. Prevents collisions.</td><td>CSMA/CD (Ethernet), token passing, TDMA</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#1d4ed8">DLL Service Types</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Service Type</th><th>Connection</th><th>Acknowledgement</th><th>Where Used</th></tr>
-      <tr><td><strong>Unacknowledged Connectionless</strong></td><td>No connection setup</td><td>No ACKs sent</td><td>LANs where error rate is low. Higher layers (TCP) handle errors.</td></tr>
-      <tr><td><strong>Acknowledged Connectionless</strong></td><td>No connection setup</td><td>Each frame ACKed; retransmit if no ACK</td><td>Unreliable channels like wireless</td></tr>
-      <tr><td><strong>Acknowledged Connection-oriented</strong></td><td>Establish → Transfer → Release</td><td>Each frame ACKed in order, exactly once</td><td>Reliable delivery required, long-distance WAN</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#1d4ed8">Framing in Detail</h2>
-    <div class="def"><div class="def-term">Frame Structure</div><p>A frame consists of: <strong>Header</strong> (source/dest MAC, seq number, ACK number, type) + <strong>Payload</strong> (data from network layer) + <strong>Trailer</strong> (error detection bits like CRC) + sometimes a <strong>Preamble</strong>.</p></div>
-    <ul class="pts">
-      <li><strong>Fixed-size framing:</strong> Frame is a fixed length. No need to mark boundaries. Drawback: padding needed if data is shorter (internal fragmentation).</li>
-      <li><strong>Variable-size — Length field:</strong> A field in the header specifies the frame's length. Issue: length field might get corrupted.</li>
-      <li><strong>Character/Byte stuffing:</strong> Special flag character marks start/end. If data contains the flag, an escape character is inserted before it. Receiver removes escape chars.</li>
-      <li><strong>Bit stuffing:</strong> If 5 consecutive 1s appear in data, a 0 is inserted. Receiver removes any 0 after five 1s. Used in HDLC.</li>
-    </ul>
-
-    <h2 class="sec" style="color:#1d4ed8">Switch — Deep Dive</h2>
-    <div class="def"><div class="def-term">Switch</div><p>A <strong>multiport bridge</strong> with a buffer. Operates at Data Link Layer. It learns the MAC addresses of connected devices and forwards frames only to the correct port — unlike a hub which broadcasts to all ports.</p></div>
-    <ul class="pts">
-      <li><strong>CAM Table (MAC Table):</strong> Stores: Port Number, MAC Address, Type (static/dynamic), VLAN. Entries expire after ~300 seconds.</li>
-      <li><strong>Learning:</strong> When a frame arrives, the switch records the source MAC address and the port it came in on.</li>
-      <li><strong>Unicast Forwarding:</strong> If destination MAC is in the CAM table, forward frame only to that port.</li>
-      <li><strong>Flooding (Unknown Unicast):</strong> If destination MAC is NOT in the table, broadcast frame to ALL ports except the incoming port.</li>
-      <li><strong>Filtering:</strong> Forward frame only through the port associated with the destination MAC in the table.</li>
-      <li><strong>Loop Avoidance:</strong> Uses <strong>STP (Spanning Tree Protocol)</strong> to prevent Layer 2 loops when redundant links exist.</li>
-      <li><strong>Collision domain:</strong> Each switch port = its own collision domain. But broadcast domain remains the same across the switch.</li>
-    </ul>
-    <div class="note"><strong>Hub vs Switch:</strong> Hub broadcasts to ALL ports (dumb). Switch forwards to SPECIFIC port (smart). Switch creates separate collision domains per port. Hub has one shared collision domain for all ports.</div>
+  <!-- MODULE TABLE -->
+  <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Module Outline</div><div class="sec-divider-line"></div></div>
+  <div class="module-list">
+    <div class="module-row header-row">
+      <div class="mc">#</div>
+      <div class="mc">Module / Topic</div>
+      <div class="mc">Key Tags</div>
+      <div class="mc">Priority</div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">01</div>
+      <div class="mc topic"><span class="topic-name">Introduction to Computer Networks</span><span class="topic-sub">Network basics, criteria, data communication, connection types, transmission modes, guided & unguided media</span></div>
+      <div class="mc tags"><span class="tag tag-b">Basics</span><span class="tag tag-t">Media</span><span class="tag tag-p">Modes</span></div>
+      <div class="mc imp"><span class="imp-badge imp-med">Medium</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">02</div>
+      <div class="mc topic"><span class="topic-name">Networking Devices, Types & Topologies</span><span class="topic-sub">NIC, Repeater, Hub, Bridge, Switch, Router, Gateway, Firewall · PAN/LAN/MAN/WAN · Bus/Ring/Star/Mesh/Tree</span></div>
+      <div class="mc tags"><span class="tag tag-p">Devices</span><span class="tag tag-b">LAN</span><span class="tag tag-a">Topology</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">03</div>
+      <div class="mc topic"><span class="topic-name">Layered Architecture — OSI & TCP/IP Models</span><span class="topic-sub">Why layered, all 7 OSI layers with PDUs & protocols, TCP/IP 4-layer model, comparison</span></div>
+      <div class="mc tags"><span class="tag tag-b">OSI</span><span class="tag tag-t">TCP/IP</span><span class="tag tag-p">DoD</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">04</div>
+      <div class="mc topic"><span class="topic-name">Physical Layer</span><span class="topic-sub">Line coding (Unipolar, Polar, Bipolar), NRZ-L/I, Manchester, AMI, Pseudoternary, Baud rate, Switching types</span></div>
+      <div class="mc tags"><span class="tag tag-r">Line Coding</span><span class="tag tag-a">Baud Rate</span><span class="tag tag-g">Switching</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">05</div>
+      <div class="mc topic"><span class="topic-name">Data Link Layer (DLL)</span><span class="topic-sub">5 services (Framing, MAC, Flow, Error, Access), DLL service types, Framing methods (bit/byte stuffing), Switch deep-dive, CAM table, STP</span></div>
+      <div class="mc tags"><span class="tag tag-b">Framing</span><span class="tag tag-p">MAC</span><span class="tag tag-t">Switch</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">06</div>
+      <div class="mc topic"><span class="topic-name">Error Detection & Correction</span><span class="topic-sub">Single-bit vs burst errors, redundancy, block coding C(n,k), Modulo-2 arithmetic, Hamming distance, CRC, Checksum</span></div>
+      <div class="mc tags"><span class="tag tag-r">CRC</span><span class="tag tag-p">Hamming</span><span class="tag tag-a">Block Coding</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High ★</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">07</div>
+      <div class="mc topic"><span class="topic-name">Flow Control & ARQ Protocols</span><span class="topic-sub">Delay types (Tt, Tp, TQ, Tpro), Stop-and-Wait, S&W ARQ, Sliding Window, Go-Back-N, Selective Repeat, efficiency formulas</span></div>
+      <div class="mc tags"><span class="tag tag-a">ARQ</span><span class="tag tag-b">GBN</span><span class="tag tag-g">SR</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High ★</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">08</div>
+      <div class="mc topic"><span class="topic-name">Ethernet & Bluetooth</span><span class="topic-sub">Ethernet types (Fast/Gigabit/10G), Ethernet frame structure, Bluetooth 2.4 GHz, freq hopping, Piconet, Scatternet, IEEE 802 standards</span></div>
+      <div class="mc tags"><span class="tag tag-o">Ethernet</span><span class="tag tag-t">Bluetooth</span><span class="tag tag-b">IEEE</span></div>
+      <div class="mc imp"><span class="imp-badge imp-med">Medium</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">09</div>
+      <div class="mc topic"><span class="topic-name">Wi-Fi / WLAN</span><span class="topic-sub">802.11a/b/g standards, Ad hoc (IBSS) vs Infrastructure (BSS/ESS), AP, Portal, STA, WEP/WPA/WPA2 security</span></div>
+      <div class="mc tags"><span class="tag tag-g">WLAN</span><span class="tag tag-b">802.11</span><span class="tag tag-r">Security</span></div>
+      <div class="mc imp"><span class="imp-badge imp-med">Medium</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">10</div>
+      <div class="mc topic"><span class="topic-name">Network Layer — IPv4 Addressing</span><span class="topic-sub">IPv4 32-bit address, dotted-decimal, classful A/B/C/D/E, CIDR /n notation, subnet mask, subnetting, IANA/ARIN</span></div>
+      <div class="mc tags"><span class="tag tag-t">IPv4</span><span class="tag tag-b">CIDR</span><span class="tag tag-p">Subnetting</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High ★</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">11</div>
+      <div class="mc topic"><span class="topic-name">Network Layer — IPv4 Datagram & Fragmentation</span><span class="topic-sub">All header fields (Version, HLEN, TOS, TTL, Protocol, Flags, Offset etc.), MTU, DF/MF bits, fragmentation & reassembly</span></div>
+      <div class="mc tags"><span class="tag tag-a">Header</span><span class="tag tag-r">Fragmentation</span><span class="tag tag-t">MTU</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High ★</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">12</div>
+      <div class="mc topic"><span class="topic-name">Network Protocols — ICMP, ARP, RARP, DHCP</span><span class="topic-sub">ICMP error/query messages, ping/traceroute, ARP working, Proxy/Gratuitous/RARP/Inverse ARP, DHCP DORA process</span></div>
+      <div class="mc tags"><span class="tag tag-r">ICMP</span><span class="tag tag-p">ARP</span><span class="tag tag-g">DHCP</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">13</div>
+      <div class="mc topic"><span class="topic-name">Routing Fundamentals</span><span class="topic-sub">Forwarding vs routing, routing table methods, LPM, Autonomous Systems, DVR/Bellman-Ford/RIP, Link State/OSPF/Dijkstra</span></div>
+      <div class="mc tags"><span class="tag tag-b">Routing</span><span class="tag tag-p">DVR</span><span class="tag tag-g">OSPF</span></div>
+      <div class="mc imp"><span class="imp-badge imp-med">Medium</span></div>
+    </div>
+    <div class="module-row">
+      <div class="mc num">14</div>
+      <div class="mc topic"><span class="topic-name">Numericals — All Types</span><span class="topic-sub">CRC (Modulo-2 division), Hamming distance, Stop-and-Wait efficiency, GBN/SR throughput, IPv4 header parsing, Fragmentation, Subnetting, Nyquist/Shannon, Baud rate, Distance Vector tables</span></div>
+      <div class="mc tags"><span class="tag tag-a">CRC</span><span class="tag tag-r">Subnet</span><span class="tag tag-o">ARQ</span><span class="tag tag-t">Baud</span></div>
+      <div class="mc imp"><span class="imp-badge imp-high">High ★★</span></div>
+    </div>
   </div>
+
+  <!-- DETAILED TOPIC BREAKDOWN -->
+  <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Detailed Topic Breakdown</div><div class="sec-divider-line"></div></div>
+  <div class="topics-grid">
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(29,78,216,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(29,78,216,.1);color:#1d4ed8;">01</div>
+        <div class="topic-card-title">Introduction</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Network, node, communication channel definitions</div>
+        <div class="topic-item">Criteria: <strong>Performance, Reliability, Scalability, Security</strong></div>
+        <div class="topic-item">Data comm: Delivery, Timeliness, Accuracy</div>
+        <div class="topic-item">Point-to-point vs Multipoint connections</div>
+        <div class="topic-item"><strong>Transmission modes:</strong> Simplex / Half-duplex / Full-duplex</div>
+        <div class="topic-item">Guided media: UTP (Cat-5/5e/6, RJ45), STP, Coaxial, Fiber</div>
+        <div class="topic-item">Unguided media: Radio, microwave, infrared</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(109,40,217,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(109,40,217,.1);color:#6d28d9;">02</div>
+        <div class="topic-card-title">Devices & Topologies</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">NIC (MAC address), Repeater (L1), Hub (L1 broadcast)</div>
+        <div class="topic-item">Bridge (L2, 2-port, MAC filter), Switch (L2, multiport)</div>
+        <div class="topic-item">Router (L3/L4), Gateway (up to L5), Firewall</div>
+        <div class="topic-item"><strong>Network types:</strong> PAN → LAN → MAN → WAN</div>
+        <div class="topic-item">Bus, Ring (token), Star, Mesh, Tree, Hybrid topologies</div>
+        <div class="topic-item">Bus: cables = N+1; Star: central device SPOF</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(6,95,70,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(6,95,70,.1);color:#065f46;">03</div>
+        <div class="topic-card-title">OSI & TCP/IP Models</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Why layered: divide-and-conquer, modularity, testability</div>
+        <div class="topic-item"><strong>OSI 7 layers:</strong> Physical→Data Link→Network→Transport→Session→Presentation→Application</div>
+        <div class="topic-item">Transport layer = <strong>Heart of OSI</strong> · PDU = Segment · TCP/UDP</div>
+        <div class="topic-item">Network layer: IP, routing, logical addressing</div>
+        <div class="topic-item">Data Link: MAC, frames; Physical: bits, signals</div>
+        <div class="topic-item"><strong>TCP/IP 4 layers:</strong> Application / Transport / Internet / Network Access</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(153,27,27,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(153,27,27,.1);color:#991b1b;">04</div>
+        <div class="topic-card-title">Physical Layer</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Line coding: digital data → digital signals, formula <strong>S = cN/r</strong></div>
+        <div class="topic-item">Unipolar: NRZ (1=+V, 0=0V), RZ (returns to 0 mid-bit)</div>
+        <div class="topic-item">Polar: NRZ-L (level), NRZ-I (inversion on 1), RZ (3 levels)</div>
+        <div class="topic-item"><strong>Manchester</strong> (H→L=1) used in Ethernet; always r=1/2 so baud=2×bitrate</div>
+        <div class="topic-item">Bipolar: AMI (0=0V, 1s alternate +/-V), Pseudoternary (reverse)</div>
+        <div class="topic-item">Switching: Circuit / Packet / Message; Ingress / Egress</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(29,78,216,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(29,78,216,.1);color:#1d4ed8;">05</div>
+        <div class="topic-card-title">Data Link Layer</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item"><strong>Framing:</strong> Char count, char stuffing, bit stuffing (add 0 after five 1s), flags</div>
+        <div class="topic-item"><strong>Physical Addressing:</strong> MAC = 6 bytes / 48-bit / 12 hex / burned in NIC</div>
+        <div class="topic-item"><strong>Flow Control:</strong> Rate coordination sender↔receiver</div>
+        <div class="topic-item"><strong>Error Control:</strong> ACK, NACK, timers, sequence numbers</div>
+        <div class="topic-item"><strong>Access Control:</strong> Prevent/handle collisions on shared medium</div>
+        <div class="topic-item">Switch: CAM table (~300s), Learning, Unicast/Flooding, STP for loop avoidance</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(109,40,217,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(109,40,217,.1);color:#6d28d9;">06</div>
+        <div class="topic-card-title">Error Detection & CRC</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Single-bit error (rare) vs Burst error (common)</div>
+        <div class="topic-item">Detection (ARQ) vs Correction (FEC)</div>
+        <div class="topic-item">Block coding: n = k + r; 2^k valid, 2^n total codewords</div>
+        <div class="topic-item"><strong>Hamming distance:</strong> XOR → count 1s; d_min ≥ s+1 detect; d_min ≥ 2t+1 correct</div>
+        <div class="topic-item"><strong>CRC:</strong> Append r zeros → Modulo-2 divide by P → remainder = CRC</div>
+        <div class="topic-item">Checksum: 1's complement sum; receiver adds all → 0 = no error</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(146,64,14,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(146,64,14,.1);color:#92400e;">07</div>
+        <div class="topic-card-title">Flow Control & ARQ</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Delays: Tt=L/B, Tp=D/V, Queuing, Processing; Total = Tt+Tp+TQ+Tpro</div>
+        <div class="topic-item"><strong>Stop-and-Wait:</strong> Send 1 wait for ACK; η=1/(1+2a); min seq=2</div>
+        <div class="topic-item"><strong>Go-Back-N:</strong> Sender=N, Receiver=1; on error retransmit window; seq=N+1</div>
+        <div class="topic-item"><strong>Selective Repeat:</strong> Both windows=N; only retransmit lost; seq=2N; NACK</div>
+        <div class="topic-item">GBN & SR efficiency: η = N/(1+2a); throughput = η × B</div>
+        <div class="topic-item">SR window = 2^(n-1); GBN window = 2^n − 1</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(194,65,12,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(194,65,12,.1);color:#c2410c;">08</div>
+        <div class="topic-card-title">Ethernet & Bluetooth</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Created 1973, Xerox PARC, Robert Metcalfe</div>
+        <div class="topic-item">Fast (100 Mbps), Gigabit (1 Gbps), 10G (CAT6a/fiber)</div>
+        <div class="topic-item">Frame: Preamble→SFD→Dest MAC→Src MAC→Length→Data→CRC</div>
+        <div class="topic-item">Bluetooth: 2.4 GHz ISM, 1600 hops/sec, 10m range, 1 Mb/s</div>
+        <div class="topic-item"><strong>Piconet:</strong> 1 master + 7 slaves; <strong>Scatternet:</strong> piconets linked</div>
+        <div class="topic-item">Founded 1998: Ericsson, Intel, IBM, Nokia, Toshiba</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(6,95,70,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(6,95,70,.1);color:#065f46;">09</div>
+        <div class="topic-card-title">Wi-Fi / WLAN</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">802.11b: 11 Mbps / 2.4 GHz; 802.11a: 54 Mbps / 5 GHz; 802.11g: 15-20 Mbps</div>
+        <div class="topic-item"><strong>Ad hoc (IBSS):</strong> direct device-to-device, no AP, temporary</div>
+        <div class="topic-item"><strong>Infrastructure (BSS/ESS):</strong> Access Point controls traffic, supports roaming</div>
+        <div class="topic-item">Components: STA, BSS, AP, Portal, Distribution System, ESS</div>
+        <div class="topic-item">Security: WEP (broken) → WPA (TKIP) → WPA2 (AES) strongest</div>
+        <div class="topic-item">WEP broken: 40-bit key, static, weak IV — crackable in &lt;10 min</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(14,116,144,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(14,116,144,.1);color:#0e7490;">10</div>
+        <div class="topic-card-title">IPv4 Addressing</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">32-bit, dotted-decimal, 2³² ≈ 4.3B addresses; managed by IANA/ARIN</div>
+        <div class="topic-item">Class A (0, /8), B (10, /16), C (110, /24), D (multicast), E (reserved)</div>
+        <div class="topic-item"><strong>CIDR /n:</strong> First = set host bits 0; Last = set host bits 1</div>
+        <div class="topic-item">Total addresses = 2^(32-n); Usable = 2^(32-n) − 2</div>
+        <div class="topic-item">Subnet mask shortcuts: /25→128, /26→192, /27→224, /28→240</div>
+        <div class="topic-item">Subnetting: bits borrowed = new-old prefix; subnets = 2^borrowed</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(146,64,14,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(146,64,14,.1);color:#92400e;">11</div>
+        <div class="topic-card-title">IPv4 Datagram & Fragmentation</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Header min 20 bytes (HLEN=5), max 60 bytes (HLEN=15)</div>
+        <div class="topic-item">Header size = HLEN×4; Options = (HLEN×4)−20; Data = TotalLen−Header</div>
+        <div class="topic-item">TTL: decremented per hop, discard at 0; Protocol: 1=ICMP, 6=TCP, 17=UDP</div>
+        <div class="topic-item"><strong>DF=1:</strong> don't fragment (drop + ICMP error); <strong>MF=1:</strong> more fragments follow</div>
+        <div class="topic-item">Fragment offset in 8-byte units; First byte = offset × 8</div>
+        <div class="topic-item">Reassembly ONLY at destination; fragments share same Identification</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(153,27,27,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(153,27,27,.1);color:#991b1b;">12</div>
+        <div class="topic-card-title">Network Protocols</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item"><strong>ICMP errors:</strong> Dest unreachable, Source quench, Time exceeded, Redirect, Parameter problem</div>
+        <div class="topic-item"><strong>ICMP query:</strong> Echo req/reply (ping), Timestamp req/reply</div>
+        <div class="topic-item">ICMP DDoS: ICMP Flood, Smurf attack, Ping of Death</div>
+        <div class="topic-item"><strong>ARP:</strong> IP→MAC; broadcast req, unicast reply, stored in ARP cache</div>
+        <div class="topic-item">Proxy ARP (router replies for other subnet), Gratuitous ARP (boot broadcast, IP conflict detection)</div>
+        <div class="topic-item">RARP (MAC→IP, legacy), Inverse ARP (virtual circuit→IP, Frame Relay/ATM)</div>
+        <div class="topic-item"><strong>DHCP:</strong> DORA — Discover → Offer → Request → Acknowledge</div>
+      </div>
+    </div>
+
+    <div class="topic-card">
+      <div class="topic-card-head" style="background:rgba(29,78,216,.05);border-bottom:1px solid var(--b1);">
+        <div class="topic-card-num" style="background:rgba(29,78,216,.1);color:#1d4ed8;">13</div>
+        <div class="topic-card-title">Routing Fundamentals</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item">Forwarding (per-packet, local) vs Routing (table-building, global)</div>
+        <div class="topic-item">Routing methods: next-hop, network-specific, default route</div>
+        <div class="topic-item"><strong>LPM:</strong> longest subnet mask wins when multiple routes match</div>
+        <div class="topic-item">AS (Autonomous System): single admin domain; Intra-AS: RIP/OSPF; Inter-AS: BGP</div>
+        <div class="topic-item"><strong>DVR (RIP):</strong> Bellman-Ford; share table with neighbors; count-to-infinity problem</div>
+        <div class="topic-item"><strong>Link State (OSPF):</strong> flood LSAs to all; Dijkstra SPF; faster convergence; no loops</div>
+      </div>
+    </div>
+
+    <div class="topic-card" style="border-color:#f5d77a;">
+      <div class="topic-card-head" style="background:#fffbf0;border-bottom:2px solid #f5d77a;">
+        <div class="topic-card-num" style="background:#fef3c7;color:#92400e;">14</div>
+        <div class="topic-card-title" style="color:#92400e;">★ Numerical Problem Types</div>
+      </div>
+      <div class="topic-card-body">
+        <div class="topic-item"><strong>CRC:</strong> Append r zeros → XOR long divide by P → remainder = CRC → verify</div>
+        <div class="topic-item"><strong>Hamming:</strong> XOR → count 1s → d_min → detection/correction capability</div>
+        <div class="topic-item"><strong>Stop-and-Wait:</strong> Tt=L/B, Tp=RTT/2, a=Tp/Tt, η=1/(1+2a)</div>
+        <div class="topic-item"><strong>GBN/SR:</strong> η=N/(1+2a), Throughput=η×B, seq numbers, window sizes</div>
+        <div class="topic-item"><strong>IPv4 Header:</strong> HLEN×4=header size, options=header-20, parse hex bytes</div>
+        <div class="topic-item"><strong>Fragmentation:</strong> Frags=⌈data/(MTU-20)⌉, offset=byte/8, MF/DF flags</div>
+        <div class="topic-item"><strong>Subnetting:</strong> /n → mask → first/last address → usable hosts</div>
+        <div class="topic-item"><strong>Baud/Nyquist/Shannon:</strong> S=cN/r, Nyquist=2B·log₂L, Shannon=B·log₂(1+SNR)</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EXAM FORMAT -->
+  <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Exam Pattern</div><div class="sec-divider-line"></div></div>
+  <div class="exam-grid">
+    <div class="exam-card">
+      <div class="exam-card-title">📝 Question Breakdown</div>
+      <div class="exam-row"><span class="exam-row-label">Section A — Theory Questions</span><span class="exam-row-val">3 × 5 = 15 marks</span></div>
+      <div class="exam-row"><span class="exam-row-label">Section B — MCQs</span><span class="exam-row-val">5 × 1 = 5 marks</span></div>
+      <div class="exam-row"><span class="exam-row-label">Total Marks</span><span class="exam-row-val" style="color:#1d4ed8;font-size:18px;">20 marks</span></div>
+      <div class="exam-row"><span class="exam-row-label">Mode</span><span class="exam-row-val">Pen · Paper · Written</span></div>
+      <div class="exam-row"><span class="exam-row-label">Date & Time</span><span class="exam-row-val">March 26, 2026 · 10:30 AM</span></div>
+    </div>
+    <div class="exam-card">
+      <div class="exam-card-title">🎯 Mark Distribution</div>
+      <div class="score-bar">
+        <div class="score-bar-label"><span>Theory (5-mark questions)</span><span>75%</span></div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:75%;background:#1d4ed8;"></div></div>
+      </div>
+      <div class="score-bar" style="margin-top:14px;">
+        <div class="score-bar-label"><span>MCQs (1-mark each)</span><span>25%</span></div>
+        <div class="score-bar-track"><div class="score-bar-fill" style="width:25%;background:#6d28d9;"></div></div>
+      </div>
+      <div style="margin-top:20px;padding:14px 16px;background:#f0fdf4;border-radius:8px;border:1px solid rgba(6,95,70,.2);">
+        <div style="font-size:13px;color:#065f46;font-weight:700;margin-bottom:6px;">✓ Confirmed in the test (from classmates):</div>
+        <div style="font-size:13px;color:#065f46;line-height:1.7;">CRC numericals · Subnetting · Header length calculations · Baud rate · 4 theory questions</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMPORTANT TOPICS -->
+  <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Priority Guide</div><div class="sec-divider-line"></div></div>
+  <div class="imp-grid">
+    <div class="imp-section">
+      <div class="imp-section-title" style="color:#991b1b;">🔴 Must Know (High Priority)</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>CRC — Modulo-2 long division, full worked steps</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>Subnetting — /n mask, first/last address, hosts</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>IPv4 Header — HLEN, options, hex parsing</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>IP Fragmentation — MTU, offset, MF/DF, fragment table</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>Go-Back-N & Selective Repeat — efficiency, window, seq nums</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>OSI 7 layers — all names, PDUs, protocols</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>Baud rate / Nyquist / Shannon formulas</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#991b1b;"></div>ARP types — Regular, Proxy, Gratuitous, RARP, Inverse</div>
+    </div>
+    <div class="imp-section">
+      <div class="imp-section-title" style="color:#92400e;">🟡 Should Know (Medium Priority)</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>Hamming distance — XOR method, d_min, detection/correction</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>Stop-and-Wait — efficiency formula, min packet size</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>ICMP — all error & query message types</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>Switch functions — CAM table, learning, flooding, STP</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>DLL services — all 5 with definitions</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>Line coding schemes — Manchester especially</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>Distance Vector Routing — Bellman-Ford table updates</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#92400e;"></div>DVR vs Link State — convergence, loops, algorithm</div>
+    </div>
+    <div class="imp-section">
+      <div class="imp-section-title" style="color:#065f46;">🟢 Good to Know (Lower Priority)</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>Network types — PAN, LAN, MAN, WAN differences</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>Topologies — pros/cons of each</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>Ethernet types and speeds</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>Bluetooth — Piconet, Scatternet, 2.4 GHz, freq hopping</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>Wi-Fi standards 802.11a/b/g</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>WEP/WPA/WPA2 security levels</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>WLAN topologies — ad hoc vs infrastructure</div>
+      <div class="imp-item"><div class="imp-dot" style="background:#065f46;"></div>DHCP DORA process</div>
+    </div>
+  </div>
+
+  <!-- FORMULA SHEET -->
+  <div class="sec-divider"><div class="sec-divider-line"></div><div class="sec-divider-label">Formula Reference</div><div class="sec-divider-line"></div></div>
+  <div class="formula-grid">
+    <div class="fcard"><div class="fcard-label">Transmission Delay</div><div class="fcard-val">Tt = L / B</div><div class="fcard-desc">L = bits, B = bandwidth (bps)</div></div>
+    <div class="fcard"><div class="fcard-label">Propagation Delay</div><div class="fcard-val">Tp = D / V</div><div class="fcard-desc">D = distance, V = signal speed</div></div>
+    <div class="fcard"><div class="fcard-label">RTT</div><div class="fcard-val">RTT = 2 × Tp</div><div class="fcard-desc">Round Trip Time</div></div>
+    <div class="fcard"><div class="fcard-label">a ratio</div><div class="fcard-val">a = Tp / Tt</div><div class="fcard-desc">Higher a = worse S&W efficiency</div></div>
+    <div class="fcard"><div class="fcard-label">Stop-and-Wait η</div><div class="fcard-val">1 / (1 + 2a)</div><div class="fcard-desc">Window size = 1</div></div>
+    <div class="fcard"><div class="fcard-label">GBN / SR η</div><div class="fcard-val">N / (1 + 2a)</div><div class="fcard-desc">N = window size</div></div>
+    <div class="fcard"><div class="fcard-label">Throughput</div><div class="fcard-val">η × Bandwidth</div><div class="fcard-desc">Effective data rate</div></div>
+    <div class="fcard"><div class="fcard-label">SR Window</div><div class="fcard-val">N = 2^(n-1)</div><div class="fcard-desc">n = bits in seq number field</div></div>
+    <div class="fcard"><div class="fcard-label">GBN Seq Numbers</div><div class="fcard-val">N + 1</div><div class="fcard-desc">SR seq numbers = 2N</div></div>
+    <div class="fcard"><div class="fcard-label">IPv4 Addresses</div><div class="fcard-val">2^(32 − n)</div><div class="fcard-desc">n = prefix length</div></div>
+    <div class="fcard"><div class="fcard-label">Usable Hosts</div><div class="fcard-val">2^(32−n) − 2</div><div class="fcard-desc">Subtract network + broadcast</div></div>
+    <div class="fcard"><div class="fcard-label">Header Size</div><div class="fcard-val">HLEN × 4</div><div class="fcard-desc">Min 20 (HLEN=5), Max 60 (HLEN=15)</div></div>
+    <div class="fcard"><div class="fcard-label">Data Bytes</div><div class="fcard-val">Total Length − Header</div><div class="fcard-desc">Options = header − 20</div></div>
+    <div class="fcard"><div class="fcard-label">Fragment Offset</div><div class="fcard-val">byte_pos / 8</div><div class="fcard-desc">First byte = offset × 8</div></div>
+    <div class="fcard"><div class="fcard-label">Num Fragments</div><div class="fcard-val">⌈ data / (MTU−20) ⌉</div><div class="fcard-desc">Ceiling division</div></div>
+    <div class="fcard"><div class="fcard-label">Baud Rate</div><div class="fcard-val">S = cN / r</div><div class="fcard-desc">c=case factor, r=data/signal ratio</div></div>
+    <div class="fcard"><div class="fcard-label">Nyquist</div><div class="fcard-val">2B × log₂(L)</div><div class="fcard-desc">Noiseless channel max rate</div></div>
+    <div class="fcard"><div class="fcard-label">Shannon</div><div class="fcard-val">B × log₂(1 + SNR)</div><div class="fcard-desc">Noisy channel max rate</div></div>
+    <div class="fcard"><div class="fcard-label">Detect s errors</div><div class="fcard-val">d_min ≥ s + 1</div><div class="fcard-desc">Hamming distance requirement</div></div>
+    <div class="fcard"><div class="fcard-label">Correct t errors</div><div class="fcard-val">d_min ≥ 2t + 1</div><div class="fcard-desc">Use odd d_min for correction</div></div>
+    <div class="fcard"><div class="fcard-label">Block Coding</div><div class="fcard-val">n = k + r</div><div class="fcard-desc">k=data, r=redundant, n=codeword</div></div>
+    <div class="fcard"><div class="fcard-label">CRC Bits (r)</div><div class="fcard-val">len(generator) − 1</div><div class="fcard-desc">Append r zeros to data</div></div>
+  </div>
+
 </div>
 
-<!-- ════════════════════ CH 6 ════════════════════ -->
-<div class="chapter" id="ch6">
-  <div class="ch-head" style="background:rgba(124,58,237,.05);border-color:rgba(124,58,237,.18);" onclick="tog(this)">
-    <div class="ch-icon">🛡</div>
-    <div class="ch-title">Chapter 6 — Error Detection & Correction (CRC, Hamming)</div>
-    <div class="ch-badge c2">ERRORS</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(124,58,237,.12);">
-
-    <h2 class="sec" style="color:#6d28d9">Types of Errors</h2>
-    <div class="def-grid">
-      <div class="def"><div class="def-term">Single-Bit Error</div><p>Only <strong>1 bit</strong> changes from 0→1 or 1→0. Very rare in serial transmission because noise duration is usually longer than 1 bit.</p></div>
-      <div class="def"><div class="def-term">Burst Error</div><p><strong>2 or more consecutive bits</strong> are corrupted. More common because noise affects a span of time, corrupting multiple bits in a row.</p></div>
-    </div>
-
-    <h2 class="sec" style="color:#6d28d9">Redundancy — The Core Idea</h2>
-    <div class="def"><div class="def-term">Redundancy</div><p>To detect or correct errors, the sender adds <strong>extra (redundant) bits</strong> to the data before sending. The receiver uses these extra bits to check for or fix errors.</p></div>
-    <div class="tbl-wrap"><table>
-      <tr><th>Approach</th><th>Goal</th><th>Action on Error</th><th>Technique</th></tr>
-      <tr><td><strong>Error Detection</strong></td><td>Find out IF an error occurred (YES/NO)</td><td>Request retransmission (ARQ)</td><td>Parity, CRC, Checksum</td></tr>
-      <tr><td><strong>Error Correction</strong></td><td>Find WHERE and HOW MANY errors occurred</td><td>Fix the error without retransmission (FEC)</td><td>Hamming codes</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#6d28d9">Block Coding C(n, k)</h2>
-    <div class="def"><div class="def-term">Block Coding</div><p>Divide message into blocks of <strong>k bits</strong> (datawords). Add <strong>r redundant bits</strong> to make <strong>n = k + r</strong> bit <strong>codewords</strong>. Same dataword always encodes to same codeword.</p></div>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">Codeword Length</div><div class="fv">n = k + r</div><div class="fd">k=data bits, r=redundant bits</div></div>
-      <div class="fbox"><div class="fl">Valid Codewords</div><div class="fv">2^k</div><div class="fd">One per dataword</div></div>
-      <div class="fbox"><div class="fl">Total Codewords</div><div class="fv">2^n</div><div class="fd">All possible n-bit patterns</div></div>
-      <div class="fbox"><div class="fl">Unused Codewords</div><div class="fv">2^n − 2^k</div><div class="fd">Landing here = error detected</div></div>
-    </div>
-
-    <h2 class="sec" style="color:#6d28d9">Modulo-2 Arithmetic (XOR)</h2>
-    <ul class="pts">
-      <li>Only values: <strong>0 and 1</strong>. Addition = Subtraction = <strong>XOR</strong>.</li>
-      <li><strong>0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0</strong> — No carry, no borrow, ever.</li>
-      <li>This arithmetic is used in CRC division.</li>
-    </ul>
-
-    <h2 class="sec" style="color:#6d28d9">Hamming Distance</h2>
-    <div class="def"><div class="def-term">Hamming Distance d(x,y)</div><p>The number of <strong>bit positions where two codewords differ</strong>. Calculated by XORing the two words and counting the number of 1s in the result.</p></div>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">Calculate Distance</div><div class="fv">XOR then count 1s</div><div class="fd">d(10101,11110) = 01011 = 3</div></div>
-      <div class="fbox"><div class="fl">Minimum Distance</div><div class="fv">d_min</div><div class="fd">Smallest distance across all codeword pairs</div></div>
-      <div class="fbox"><div class="fl">Detect s errors</div><div class="fv">d_min ≥ s + 1</div><div class="fd">Corrupted word won't match valid codeword</div></div>
-      <div class="fbox"><div class="fl">Correct t errors</div><div class="fv">d_min ≥ 2t + 1</div><div class="fd">Each codeword has exclusive territory of radius t</div></div>
-    </div>
-    <div class="note"><strong>Even d_min:</strong> A d_min=4 can detect 3 errors but only correct 1. Error correction codes should have odd d_min (3, 5, 7...) to avoid wasting capability.</div>
-
-    <h2 class="sec" style="color:#6d28d9">CRC — Cyclic Redundancy Check</h2>
-    <div class="def"><div class="def-term">CRC</div><p>A type of cyclic block code widely used in networks (Ethernet, WAN). The sender performs <strong>Modulo-2 division</strong> of the data by a generator polynomial. The <strong>remainder is the CRC</strong>, which is appended to the data. The receiver performs the same division — if remainder is 0, no error.</p></div>
-    <ul class="pts">
-      <li><strong>Generator Polynomial (P):</strong> Agreed upon by both sender and receiver. Its degree r determines the CRC length.</li>
-      <li><strong>Step 1:</strong> Append r zeros to data M → M'</li>
-      <li><strong>Step 2:</strong> Divide M' by P using Modulo-2 (XOR) division</li>
-      <li><strong>Step 3:</strong> Remainder R = CRC (exactly r bits)</li>
-      <li><strong>Step 4:</strong> Transmitted = M + R (replace the r zeros with R)</li>
-      <li><strong>Verification:</strong> Receiver divides received frame by P. Remainder = 0 → no error. ≠ 0 → error.</li>
-    </ul>
-    <div class="tip"><strong>CRC can detect:</strong> All single-bit errors, all double-bit errors (if generator chosen correctly), all odd-number errors (if generator has factor x+1), all burst errors of length ≤ r.</div>
-
-    <h2 class="sec" style="color:#6d28d9">Checksum</h2>
-    <div class="def"><div class="def-term">Checksum</div><p>Used at higher layers (Internet). Sender adds the values of all data units together and sends the <strong>1's complement (negative)</strong> of the sum (the checksum). Receiver adds all received values including checksum. If result = 0 → no error. Used in IP, TCP, UDP headers.</p></div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 7 ════════════════════ -->
-<div class="chapter" id="ch7">
-  <div class="ch-head" style="background:rgba(217,119,6,.05);border-color:rgba(217,119,6,.2);" onclick="tog(this)">
-    <div class="ch-icon">⏱</div>
-    <div class="ch-title">Chapter 7 — Flow Control & ARQ Protocols</div>
-    <div class="ch-badge c4">ARQ</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(217,119,6,.12);">
-
-    <h2 class="sec" style="color:#b45309">Types of Delay</h2>
-    <div class="def-grid">
-      <div class="def"><div class="def-term">Transmission Delay (Tt)</div><p>Time to <strong>put the packet onto the link</strong>. = Length of packet / Bandwidth. Depends on packet size and link speed.</p></div>
-      <div class="def"><div class="def-term">Propagation Delay (Tp)</div><p>Time for <strong>one bit to travel</strong> from sender to receiver. = Distance / Signal speed. Depends on physical distance and medium.</p></div>
-      <div class="def"><div class="def-term">Queuing Delay (TQ)</div><p>Time packet waits in a <strong>queue</strong> before being processed. Depends on network congestion.</p></div>
-      <div class="def"><div class="def-term">Processing Delay (Tpro)</div><p>Time for the <strong>processor to examine</strong> the packet header and determine where to send it.</p></div>
-    </div>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">Transmission Delay</div><div class="fv">Tt = L / B</div><div class="fd">L in bits, B in bps</div></div>
-      <div class="fbox"><div class="fl">Propagation Delay</div><div class="fv">Tp = D / V</div><div class="fd">D=distance, V=signal speed</div></div>
-      <div class="fbox"><div class="fl">Total Delay</div><div class="fv">Tt + Tp + TQ + Tpro</div><div class="fd">Often simplified to Tt + Tp</div></div>
-      <div class="fbox"><div class="fl">RTT</div><div class="fv">2 × Tp</div><div class="fd">Round trip time</div></div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">Stop-and-Wait Protocol</h2>
-    <div class="def"><div class="def-term">Stop-and-Wait</div><p>The simplest flow control protocol. Sender sends <strong>one frame, then stops</strong> and waits for an ACK from the receiver before sending the next frame. Used for noiseless channels originally.</p></div>
-    <ul class="pts">
-      <li>Sender window = 1, Receiver window = 1</li>
-      <li>Minimum sequence numbers = 2 (just 0 and 1)</li>
-      <li>Half-duplex: only one direction at a time</li>
-      <li><strong>Problem:</strong> Very inefficient when propagation delay >> transmission delay (satellite links)</li>
-    </ul>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">a ratio</div><div class="fv">a = Tp / Tt</div><div class="fd">Higher a = worse efficiency</div></div>
-      <div class="fbox"><div class="fl">Efficiency</div><div class="fv">η = 1 / (1 + 2a)</div><div class="fd">Useful time / total cycle time</div></div>
-      <div class="fbox"><div class="fl">Throughput</div><div class="fv">η × Bandwidth</div><div class="fd">Effective bits per second</div></div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">Stop-and-Wait ARQ</h2>
-    <div class="def"><div class="def-term">Stop-and-Wait ARQ</div><p>Improved version for <strong>noisy channels</strong>. Adds sequence numbers, timers, and retransmission to handle: (1) lost data frames, (2) lost ACKs, (3) delayed data/ACKs. It is a 1-bit sliding window protocol.</p></div>
-    <ul class="pts">
-      <li><strong>Timeout timer:</strong> If no ACK received within timer duration, sender retransmits the frame.</li>
-      <li><strong>Sequence numbers:</strong> Prevent duplicate frames from being accepted. Receiver discards duplicates.</li>
-      <li><strong>NAK (Negative Acknowledgement):</strong> Receiver sends NAK when it receives a corrupted frame, requesting immediate retransmit.</li>
-    </ul>
-
-    <h2 class="sec" style="color:#b45309">Sliding Window Protocol</h2>
-    <div class="def"><div class="def-term">Sliding Window</div><p>Allows sender to send <strong>multiple frames (up to window size N)</strong> before needing an ACK. The "window" is an imaginary set of frames that can be in-transit simultaneously. Window slides forward as ACKs are received.</p></div>
-    <ul class="pts">
-      <li><strong>Sending window:</strong> Max frames that can be unacknowledged at any time = N</li>
-      <li><strong>Sequence numbers:</strong> With n-bit field, range is 0 to 2ⁿ−1</li>
-      <li>Both GBN and SR are sliding window protocols</li>
-    </ul>
-
-    <h2 class="sec" style="color:#b45309">Go-Back-N ARQ</h2>
-    <div class="def"><div class="def-term">Go-Back-N (GBN)</div><p>Sender window = N, Receiver window = 1. Sender continuously sends frames. If one frame is corrupted or lost, receiver <strong>discards that frame AND all subsequent frames</strong>. Sender must retransmit the entire window starting from the bad frame.</p></div>
-    <ul class="pts">
-      <li>Sender window size = N (must be > 1; if N=1, it becomes Stop-and-Wait)</li>
-      <li>Receiver window = 1 (only accepts frames in order; out-of-order are silently discarded)</li>
-      <li>Minimum sequence numbers needed = <strong>N + 1</strong></li>
-      <li>Uses <strong>cumulative ACKs</strong> (one ACK can acknowledge multiple frames)</li>
-      <li>Efficiency = <strong>N / (1 + 2a)</strong></li>
-      <li>Advantage: Timer runs at receiver side only. Simple receiver.</li>
-      <li>Disadvantage: Wastes bandwidth — even good frames after bad one are retransmitted.</li>
-    </ul>
-
-    <h2 class="sec" style="color:#b45309">Selective Repeat ARQ</h2>
-    <div class="def"><div class="def-term">Selective Repeat (SR)</div><p>Sender window = N, Receiver window = N. <strong>Only the specific lost/corrupted frame is retransmitted</strong>. Receiver buffers out-of-order frames and sorts them. Uses NACK for early retransmission request.</p></div>
-    <ul class="pts">
-      <li>Sender window = Receiver window = <strong>N = 2^(n-1)</strong> where n = bits in sequence number field</li>
-      <li>Minimum sequence numbers = <strong>2N</strong></li>
-      <li>Uses <strong>NACK</strong> for early (pre-timeout) retransmission</li>
-      <li>Accepts out-of-order frames; buffers and sorts them</li>
-      <li>Efficiency = <strong>N / (1 + 2a)</strong></li>
-      <li>Advantage: Most efficient — no unnecessary retransmissions</li>
-      <li>Disadvantage: Complex; requires large buffer at receiver; more CPU for sorting</li>
-    </ul>
-
-    <h2 class="sec" style="color:#b45309">Full ARQ Comparison</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Feature</th><th>Stop-and-Wait</th><th>Go-Back-N</th><th>Selective Repeat</th></tr>
-      <tr><td><strong>Sender window</strong></td><td>1</td><td>N</td><td>N = 2^(n-1)</td></tr>
-      <tr><td><strong>Receiver window</strong></td><td>1</td><td>1</td><td>N</td></tr>
-      <tr><td><strong>Min seq numbers</strong></td><td>2</td><td>N+1</td><td>2N</td></tr>
-      <tr><td><strong>Efficiency</strong></td><td>1/(1+2a)</td><td>N/(1+2a)</td><td>N/(1+2a)</td></tr>
-      <tr><td><strong>On error</strong></td><td>Retransmit lost only</td><td>Retransmit entire window</td><td>Retransmit lost only</td></tr>
-      <tr><td><strong>Bandwidth use</strong></td><td>Low</td><td>High (wastes on error)</td><td>Moderate</td></tr>
-      <tr><td><strong>CPU use</strong></td><td>Low</td><td>Moderate</td><td>High (sorting)</td></tr>
-      <tr><td><strong>ACK type</strong></td><td>Individual</td><td>Cumulative</td><td>Individual</td></tr>
-      <tr><td><strong>Duplex</strong></td><td>Half</td><td>Full</td><td>Full</td></tr>
-      <tr><td><strong>Complexity</strong></td><td>Simple</td><td>Moderate</td><td>Complex</td></tr>
-    </table></div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 8 ════════════════════ -->
-<div class="chapter" id="ch8">
-  <div class="ch-head" style="background:rgba(234,88,12,.05);border-color:rgba(234,88,12,.2);" onclick="tog(this)">
-    <div class="ch-icon">📶</div>
-    <div class="ch-title">Chapter 8 — Ethernet & Bluetooth</div>
-    <div class="ch-badge c7">LAN</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(234,88,12,.12);">
-    <h2 class="sec" style="color:#c2410c">Ethernet</h2>
-    <div class="def"><div class="def-term">Ethernet</div><p>A <strong>wired LAN technology</strong> created at Xerox PARC in 1973 by <strong>Robert Metcalfe</strong>. Connects computers in LAN/WAN. Uses CSMA/CD (Carrier Sense Multiple Access / Collision Detection) for access control. Still the most widely used wired LAN protocol.</p></div>
-    <div class="tbl-wrap"><table>
-      <tr><th>Type</th><th>Speed</th><th>Cable</th><th>Notes</th></tr>
-      <tr><td><strong>Standard Ethernet</strong></td><td>10 Mbps</td><td>Coaxial (10Base2, 10Base5) or twisted pair (10BaseT)</td><td>Legacy</td></tr>
-      <tr><td><strong>Fast Ethernet</strong></td><td>100 Mbps</td><td>Cat5 twisted pair (100BASE-TX/T4) or fiber (100BASE-FX)</td><td>Three subtypes</td></tr>
-      <tr><td><strong>Gigabit Ethernet</strong></td><td>1000 Mbps (1 Gbps)</td><td>Fiber optic or twisted pair</td><td>Most common today</td></tr>
-      <tr><td><strong>10-Gigabit Ethernet</strong></td><td>10 Gbps</td><td>CAT6a/CAT7 or fiber (up to 10,000m)</td><td>Data centers</td></tr>
-    </table></div>
-    <div class="def"><div class="def-term">Ethernet Frame Structure</div><p><strong>Preamble</strong> (sync) → <strong>SFD</strong> (10101011, 1 byte) → <strong>Destination MAC</strong> (6 bytes) → <strong>Source MAC</strong> (6 bytes) → <strong>Length</strong> (2 bytes, max 1500) → <strong>Data</strong> (46–1500 bytes) → <strong>CRC</strong> (4 bytes error check)</p></div>
-
-    <h2 class="sec" style="color:#c2410c">Bluetooth</h2>
-    <div class="def"><div class="def-term">Bluetooth</div><p>A <strong>cable replacement wireless technology</strong> using radio frequency. Operates at <strong>2.4 GHz ISM band</strong> (globally available). Range: 10+ meters. Uses <strong>frequency hopping</strong> (1600 hops/sec) to avoid interference. Speed: 1 Mb/s symbol rate.</p></div>
-    <ul class="pts">
-      <li><strong>Founded:</strong> Spring 1998 by Ericsson, Intel, IBM, Nokia, Toshiba. Now 2000+ organizations in SIG.</li>
-      <li><strong>Frequency hopping:</strong> 1600 hops/second — the channel changes 1600 times per second to avoid interference from other devices on 2.4 GHz.</li>
-      <li><strong>Supports:</strong> Synchronous voice (3 simultaneous channels, 64 kb/s each) AND asynchronous data (max 723.2 kb/s asymmetric or 433.9 kb/s symmetric)</li>
-      <li><strong>Piconet:</strong> Up to 8 devices. 1 master + up to 7 active slaves. All on same channel and frequency hop sequence.</li>
-      <li><strong>Scatternet:</strong> Two or more piconets interconnected. A slave in one piconet CAN be the master of another. A device CANNOT be master of two piconets.</li>
-      <li><strong>Ad-hoc nature:</strong> Topology is temporary and random. Devices discover each other automatically within range.</li>
-      <li><strong>Limitations:</strong> Security vulnerabilities; interference with 2.4 GHz WLANs.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 9 ════════════════════ -->
-<div class="chapter" id="ch9">
-  <div class="ch-head" style="background:rgba(5,150,105,.05);border-color:rgba(5,150,105,.2);" onclick="tog(this)">
-    <div class="ch-icon">📡</div>
-    <div class="ch-title">Chapter 9 — Wi-Fi / WLAN</div>
-    <div class="ch-badge c3">WIRELESS</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(5,150,105,.12);">
-    <div class="def"><div class="def-term">WLAN (Wireless LAN)</div><p>A flexible data communication system implemented as an <strong>alternative to wired LAN</strong> within a building or campus. Allows user mobility without losing connectivity. Can be easily reconfigured without re-cabling.</p></div>
-    <div class="tbl-wrap"><table>
-      <tr><th>Standard</th><th>Max Speed</th><th>Frequency</th><th>Range</th><th>Notes</th></tr>
-      <tr><td><strong>IEEE 802.11b</strong></td><td>11 Mbps</td><td>2.4 GHz</td><td>100–150 ft</td><td>Used in cordless phones, microwave ovens share band</td></tr>
-      <tr><td><strong>IEEE 802.11a</strong></td><td>54 Mbps</td><td>5 GHz</td><td>Shorter</td><td>Less interference; better in high-density areas</td></tr>
-      <tr><td><strong>IEEE 802.11g</strong></td><td>15–20 Mbps</td><td>2.4 GHz</td><td>100–150 ft</td><td>Backward compatible with 802.11b</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#047857">WLAN Topologies</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Topology</th><th>Also Called</th><th>How It Works</th><th>Best For</th></tr>
-      <tr><td><strong>Ad Hoc</strong></td><td>IBSS (Independent BSS)</td><td>Devices communicate <strong>directly</strong> with each other. No Access Point. Each device is a STA. Simplest form — can be just 2 stations.</td><td>Temporary meetings, quick file sharing, military field ops</td></tr>
-      <tr><td><strong>Infrastructure</strong></td><td>BSS / ESS</td><td>All devices connect through an <strong>Access Point (AP)</strong>. AP controls transmissions, assigns priorities, allows roaming between cells.</td><td>Offices, homes, campuses — anything permanent</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#047857">Infrastructure Mode Components</h2>
-    <div class="def-grid">
-      <div class="def"><div class="def-term">STA (Station)</div><p>Any device with wireless access capability — laptop, phone, tablet. Has a wireless NIC.</p></div>
-      <div class="def"><div class="def-term">BSS (Basic Service Set)</div><p>A group of stations using the <strong>same radio frequency</strong>. The basic building block of IEEE 802.11 LAN.</p></div>
-      <div class="def"><div class="def-term">Access Point (AP)</div><p>Station integrated into both wireless LAN and the distribution system. Bridge between wireless devices and wired network.</p></div>
-      <div class="def"><div class="def-term">ESS (Extended Service Set)</div><p>Multiple BSS interconnected via a distribution system. Appears as one logical network. Supports seamless roaming.</p></div>
-      <div class="def"><div class="def-term">Portal</div><p>A <strong>bridge to other wired networks</strong>. Gateway from the WLAN to the rest of the Internet.</p></div>
-    </div>
-
-    <h2 class="sec" style="color:#047857">Wi-Fi Security (weakest to strongest)</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Protocol</th><th>Year</th><th>Encryption</th><th>Status</th></tr>
-      <tr><td><strong>WEP</strong> (Wired Equivalent Privacy)</td><td>1997</td><td>RC4, 40-bit key + 24-bit IV</td><td>Broken — crackable in &lt;10 min with Aircrack-ng. DEPRECATED.</td></tr>
-      <tr><td><strong>WPA</strong> (Wi-Fi Protected Access)</td><td>2003</td><td>TKIP (per-packet key)</td><td>Improved over WEP but has vulnerabilities</td></tr>
-      <tr><td><strong>WPA2</strong></td><td>2004</td><td>AES (strong)</td><td>Current standard. Recommended.</td></tr>
-    </table></div>
-    <div class="note"><strong>WEP's weakness:</strong> Short key (40 bits), static key (never changes), weak IV (Initialization Vector). Attacker collects enough packets to crack the key. WPA fixes this with per-packet key generation.</div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 10 ════════════════════ -->
-<div class="chapter" id="ch10">
-  <div class="ch-head" style="background:rgba(8,145,178,.05);border-color:rgba(8,145,178,.2);" onclick="tog(this)">
-    <div class="ch-icon">🌍</div>
-    <div class="ch-title">Chapter 10 — Network Layer: IPv4 Addressing</div>
-    <div class="ch-badge c6">IP ADDR</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(8,145,178,.12);">
-    <div class="def"><div class="def-term">IPv4 Address</div><p>A <strong>32-bit unique identifier</strong> for every device connected to the Internet. Written in <strong>dotted-decimal notation</strong> (four decimal numbers separated by dots, each 0–255). Address space = 2³² = 4,294,967,296 addresses.</p></div>
-
-    <h2 class="sec" style="color:#0e7490">Classful Addressing</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Class</th><th>Leading Bits</th><th>First Byte Range</th><th>Default Mask</th><th>Purpose</th><th>Network / Host split</th></tr>
-      <tr><td><strong>A</strong></td><td>0</td><td>0 – 127</td><td>255.0.0.0 (/8)</td><td>Very large networks (ISPs)</td><td>1 byte network / 3 bytes host</td></tr>
-      <tr><td><strong>B</strong></td><td>10</td><td>128 – 191</td><td>255.255.0.0 (/16)</td><td>Medium-large networks</td><td>2 bytes network / 2 bytes host</td></tr>
-      <tr><td><strong>C</strong></td><td>110</td><td>192 – 223</td><td>255.255.255.0 (/24)</td><td>Small networks</td><td>3 bytes network / 1 byte host</td></tr>
-      <tr><td><strong>D</strong></td><td>1110</td><td>224 – 239</td><td>—</td><td>Multicast</td><td>Not split into network/host</td></tr>
-      <tr><td><strong>E</strong></td><td>1111</td><td>240 – 255</td><td>—</td><td>Reserved/Experimental</td><td>Not assigned</td></tr>
-    </table></div>
-    <div class="tip"><strong>Quick class identification:</strong> Look at first byte. 0-127=A, 128-191=B, 192-223=C, 224-239=D, 240-255=E. OR look at first bits: 0=A, 10=B, 110=C, 1110=D, 1111=E.</div>
-
-    <h2 class="sec" style="color:#0e7490">CIDR — Classless Inter-Domain Routing</h2>
-    <div class="def"><div class="def-term">CIDR Notation</div><p>Written as <strong>x.y.z.t/n</strong> where n = number of network (prefix) bits. Allows flexible block sizes unlike classful addressing.</p></div>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">First Address</div><div class="fv">Set last (32-n) bits to 0</div><div class="fd">AND IP with subnet mask</div></div>
-      <div class="fbox"><div class="fl">Last Address</div><div class="fv">Set last (32-n) bits to 1</div><div class="fd">OR IP with inverted mask</div></div>
-      <div class="fbox"><div class="fl">Total Addresses</div><div class="fv">2^(32−n)</div><div class="fd">Including network + broadcast</div></div>
-      <div class="fbox"><div class="fl">Usable Hosts</div><div class="fv">2^(32−n) − 2</div><div class="fd">Subtract network and broadcast addr</div></div>
-    </div>
-    <ul class="pts">
-      <li><strong>Network address (first):</strong> NOT assigned to any device. Represents the entire block/network to the outside world.</li>
-      <li><strong>Broadcast address (last):</strong> Used to send to ALL devices in the subnet simultaneously.</li>
-      <li><strong>Two-level hierarchy:</strong> Left n bits = network (prefix), Right (32-n) bits = host.</li>
-    </ul>
-
-    <h2 class="sec" style="color:#0e7490">Subnetting</h2>
-    <div class="def"><div class="def-term">Subnetting</div><p>Splitting a large address block into <strong>smaller subnetworks</strong>. From the outside, appears as one network (single routing table entry). Internally managed as multiple subnets. Uses a subnet mask to divide the host portion.</p></div>
-    <ul class="pts">
-      <li>Bits borrowed = new prefix − original prefix</li>
-      <li>Number of subnets = 2^(bits borrowed)</li>
-      <li>Each subnet's host count = 2^(remaining host bits) − 2</li>
-    </ul>
-
-    <h2 class="sec" style="color:#0e7490">Subnet Mask Shortcut Table</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>/n</th><th>Subnet Mask</th><th>Addresses</th><th>Usable Hosts</th></tr>
-      <tr><td>/24</td><td>255.255.255.0</td><td>256</td><td>254</td></tr>
-      <tr><td>/25</td><td>255.255.255.128</td><td>128</td><td>126</td></tr>
-      <tr><td>/26</td><td>255.255.255.192</td><td>64</td><td>62</td></tr>
-      <tr><td>/27</td><td>255.255.255.224</td><td>32</td><td>30</td></tr>
-      <tr><td>/28</td><td>255.255.255.240</td><td>16</td><td>14</td></tr>
-      <tr><td>/29</td><td>255.255.255.248</td><td>8</td><td>6</td></tr>
-      <tr><td>/30</td><td>255.255.255.252</td><td>4</td><td>2</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#0e7490">IP Address Management</h2>
-    <ul class="pts">
-      <li><strong>IANA</strong> (Internet Assigned Numbers Authority): Controls all IPv4 address space globally. Part of ICANN. Roots go back to 1972 (ARPANET).</li>
-      <li><strong>ARIN</strong> (American Registry for Internet Numbers): IANA grants blocks to regional registries. ARIN handles North America.</li>
-      <li>Organizations receive ranges from registries, then advertise routes to their IP range.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 11 ════════════════════ -->
-<div class="chapter" id="ch11">
-  <div class="ch-head" style="background:rgba(217,119,6,.05);border-color:rgba(217,119,6,.2);" onclick="tog(this)">
-    <div class="ch-icon">📦</div>
-    <div class="ch-title">Chapter 11 — IPv4 Datagram, Header & Fragmentation</div>
-    <div class="ch-badge c4">DATAGRAM</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(217,119,6,.12);">
-    <div class="def"><div class="def-term">IPv4 Datagram</div><p>The <strong>basic unit of data</strong> at the Network Layer. Consists of a <strong>Header</strong> (minimum 20 bytes) + <strong>Data payload</strong>. Every device on the Internet sends data as IP datagrams. Routers read the header to decide where to send each datagram.</p></div>
-
-    <h2 class="sec" style="color:#b45309">IPv4 Header Fields — Every Single One</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Field</th><th>Size</th><th>What It Stores & Why</th></tr>
-      <tr><td><strong>Version</strong></td><td>4 bits</td><td>IP version. For IPv4 = 4 (binary 0100). Tells receiver which IP version to parse.</td></tr>
-      <tr><td><strong>HLEN</strong> (Header Length)</td><td>4 bits</td><td>Header length in <strong>4-byte (32-bit word) units</strong>. Min=5 (20 bytes), Max=15 (60 bytes). Needed because Options field makes header variable-length.</td></tr>
-      <tr><td><strong>Type of Service (TOS/DiffServ)</strong></td><td>8 bits</td><td>Specifies how the datagram should be handled (priority, delay, throughput, reliability). Modern use: DiffServ for QoS.</td></tr>
-      <tr><td><strong>Total Length</strong></td><td>16 bits</td><td>Total datagram size in bytes (header + data). Max = 2¹⁶ = 65,535 bytes. Used by receiver to know where datagram ends.</td></tr>
-      <tr><td><strong>Identification</strong></td><td>16 bits</td><td>Unique ID generated by source for each datagram. All fragments of the same datagram share the same ID. Used during reassembly.</td></tr>
-      <tr><td><strong>Flags</strong></td><td>3 bits</td><td>Bit 0: unused. Bit 1: <strong>DF (Don't Fragment)</strong> — if 1, router must NOT fragment; drops and sends ICMP error if packet > MTU. Bit 2: <strong>MF (More Fragments)</strong> — if 1, more fragments follow; 0 means last fragment.</td></tr>
-      <tr><td><strong>Fragment Offset</strong></td><td>13 bits</td><td>Position of this fragment relative to start of original datagram. In units of <strong>8 bytes</strong>. First byte of this fragment = Offset × 8.</td></tr>
-      <tr><td><strong>TTL (Time to Live)</strong></td><td>8 bits</td><td>Maximum hops (routers) the packet can travel. Each router decrements by 1. Packet is discarded when TTL reaches 0. Prevents zombie packets from circling forever.</td></tr>
-      <tr><td><strong>Protocol</strong></td><td>8 bits</td><td>Identifies the upper-layer protocol: <strong>1=ICMP, 2=IGMP, 6=TCP, 17=UDP, 89=OSPF</strong>. Tells destination how to hand data to correct process.</td></tr>
-      <tr><td><strong>Header Checksum</strong></td><td>16 bits</td><td>Error detection for the <strong>header only</strong> (not data). Must be <strong>recalculated at every router</strong> because TTL changes at each hop. Efficient algorithm, no special hardware needed.</td></tr>
-      <tr><td><strong>Source IP Address</strong></td><td>32 bits</td><td>IP address of the sending device.</td></tr>
-      <tr><td><strong>Destination IP Address</strong></td><td>32 bits</td><td>IP address of the intended recipient.</td></tr>
-      <tr><td><strong>Options</strong></td><td>Variable</td><td>Optional fields for testing, routing hints, etc. Rarely used in practice.</td></tr>
-      <tr><td><strong>Padding</strong></td><td>Variable</td><td>Zeros added to make the header a multiple of 32 bits (required for alignment).</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#b45309">Fragmentation</h2>
-    <div class="def"><div class="def-term">Fragmentation</div><p>When an IP packet is larger than the <strong>MTU (Maximum Transmission Unit)</strong> of the next link, a router must break it into smaller pieces called <strong>fragments</strong>. Each fragment is a complete IP datagram with its own header. Fragments are <strong>reassembled only at the final destination</strong>, never at intermediate routers.</p></div>
-    <ul class="pts">
-      <li><strong>MTU:</strong> Maximum frame size for a data link. Varies by network type (Ethernet = 1500 bytes, WiFi = varies).</li>
-      <li><strong>Fragment offset unit:</strong> 8 bytes. So offsets are always multiples of 8. This is why non-last fragments must have data size that's a multiple of 8.</li>
-      <li><strong>Why reassemble at destination only?</strong> Fragments might take different paths. Re-assembling at intermediate routers wastes resources and causes delays.</li>
-      <li><strong>DF=1:</strong> Source says "do NOT fragment". If packet > MTU at a router, router drops it and sends ICMP "fragmentation needed" error back to source.</li>
-    </ul>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">Max data per fragment</div><div class="fv">MTU − 20 bytes</div><div class="fd">Must be multiple of 8 (except last)</div></div>
-      <div class="fbox"><div class="fl">Fragment offset</div><div class="fv">byte_position / 8</div><div class="fd">Starting byte of fragment ÷ 8</div></div>
-      <div class="fbox"><div class="fl">First byte of fragment</div><div class="fv">Offset × 8</div><div class="fd">Multiply offset field by 8</div></div>
-      <div class="fbox"><div class="fl">Number of fragments</div><div class="fv">⌈ data / (MTU−20) ⌉</div><div class="fd">Ceiling division</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 12 ════════════════════ -->
-<div class="chapter" id="ch12">
-  <div class="ch-head" style="background:rgba(220,38,38,.04);border-color:rgba(220,38,38,.18);" onclick="tog(this)">
-    <div class="ch-icon">📨</div>
-    <div class="ch-title">Chapter 12 — Network Protocols: ICMP, ARP, RARP, DHCP</div>
-    <div class="ch-badge c5">PROTOCOLS</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(220,38,38,.12);">
-
-    <h2 class="sec" style="color:#b91c1c">ICMP — Internet Control Message Protocol</h2>
-    <div class="def"><div class="def-term">ICMP</div><p>A <strong>Network Layer protocol</strong> used by network devices (especially routers) to <strong>report errors and send diagnostic information</strong> about IP packet processing. ICMP messages travel inside IP datagrams (Protocol field = 1).</p></div>
-    <div class="tbl-wrap"><table>
-      <tr><th>Message Type</th><th>Specific Messages</th><th>Purpose</th></tr>
-      <tr><td rowspan="5"><strong>Error Reporting</strong></td><td>Destination Unreachable</td><td>Router tells source the destination cannot be reached (host down, port closed, etc.)</td></tr>
-      <tr><td>Source Quench</td><td>Router asks source to <strong>slow down</strong> — congestion is occurring</td></tr>
-      <tr><td>Time Exceeded</td><td>Datagram was <strong>discarded because TTL=0</strong>. Used by traceroute tool.</td></tr>
-      <tr><td>Parameter Problem</td><td>Header field is <strong>missing or has invalid value</strong></td></tr>
-      <tr><td>Redirect</td><td>Router tells host to use a <strong>different (better) router</strong> for a destination</td></tr>
-      <tr><td rowspan="2"><strong>Query Messages</strong></td><td>Echo Request / Echo Reply</td><td><strong>ping</strong> command — tests if destination is alive and measures RTT</td></tr>
-      <tr><td>Timestamp Request / Reply</td><td>Measures time difference between two hosts</td></tr>
-    </table></div>
-    <div class="def"><div class="def-term">ICMP Message Format</div><p><strong>Type</strong> (8 bits — 0-127 for ICMPv6 messages, 128-255 for informational) + <strong>Code</strong> (8 bits — subtype of the message) + <strong>Checksum</strong> (16 bits — detects errors in message) + rest of header.</p></div>
-    <div class="note"><strong>ICMP in DDoS attacks:</strong> ICMP Flood (overwhelm with echo requests), Smurf attack (broadcast echo to amplify), Ping of Death (oversized packet causes buffer overflow). All exploit ICMP to overwhelm targets.</div>
-
-    <h2 class="sec" style="color:#b91c1c">ARP — Address Resolution Protocol</h2>
-    <div class="def"><div class="def-term">ARP</div><p>Resolves an <strong>IP address to a MAC address</strong>. When a device wants to send to an IP address on the same LAN, it needs the MAC address. ARP finds it. It is a Network → Data Link layer mapping process (L3 → L2).</p></div>
-    <ul class="pts">
-      <li><strong>Why needed?</strong> IP address alone is not enough to send a frame on Ethernet. You need the MAC address to put in the frame header.</li>
-      <li><strong>ARP Request:</strong> Sender <strong>broadcasts</strong> to all devices: "Who has IP address X? Tell me your MAC."</li>
-      <li><strong>ARP Reply:</strong> Only the device with that IP responds with a <strong>unicast</strong> reply containing its MAC address.</li>
-      <li><strong>ARP Cache:</strong> Result is stored locally for a period. Next time, no broadcast needed.</li>
-    </ul>
-    <div class="tbl-wrap"><table>
-      <tr><th>ARP Type</th><th>Direction</th><th>Purpose</th><th>When Used</th></tr>
-      <tr><td><strong>Regular ARP</strong></td><td>IP → MAC</td><td>Find MAC from IP on same network</td><td>Before sending any frame on LAN</td></tr>
-      <tr><td><strong>Proxy ARP</strong></td><td>IP → MAC (cross-network)</td><td>Router responds to ARP for a host on a different subnet, maps its own MAC to that IP. Fools sender into thinking it reached destination. Router then forwards the packet.</td><td>When subnets aren't configured on hosts; no default gateway</td></tr>
-      <tr><td><strong>Gratuitous ARP</strong></td><td>Own IP → Own MAC</td><td>Device broadcasts its own MAC on boot. Source IP = Destination IP = device's own IP. Destination MAC = broadcast ff:ff:ff:ff:ff:ff. <strong>No reply expected.</strong> Updates ARP tables of all devices and detects IP conflicts.</td><td>Device bootup; IP conflict detection</td></tr>
-      <tr><td><strong>RARP</strong></td><td>MAC → IP</td><td>Diskless workstation broadcasts its MAC; RARP server responds with IP. Legacy — replaced by DHCP.</td><td>Old diskless terminals without stored IP</td></tr>
-      <tr><td><strong>Inverse ARP</strong></td><td>Layer 2 address → IP</td><td>Finds IP from virtual circuit address. Used in Frame Relay and ATM networks where L2 addresses are known but L3 addresses aren't.</td><td>Frame Relay, ATM networks</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#b91c1c">DHCP — Dynamic Host Configuration Protocol</h2>
-    <div class="def"><div class="def-term">DHCP</div><p>A network management protocol that <strong>automatically assigns IP configuration</strong> to devices when they join a network. Eliminates need for manual IP assignment. DHCP server assigns: IP address, subnet mask, default gateway, DNS server address, lease duration.</p></div>
-    <ul class="pts">
-      <li>Replaced RARP and BOOTP (Bootstrap Protocol) — much more feature-rich.</li>
-      <li><strong>DORA process:</strong> Discover (client broadcasts) → Offer (server proposes IP) → Request (client accepts) → Acknowledge (server confirms)</li>
-      <li>Centralized administration — one server manages all IP allocations for the network.</li>
-    </ul>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 13 ════════════════════ -->
-<div class="chapter" id="ch13">
-  <div class="ch-head" style="background:rgba(37,99,235,.06);border-color:rgba(37,99,235,.2);" onclick="tog(this)">
-    <div class="ch-icon">🗺</div>
-    <div class="ch-title">Chapter 13 — Routing Fundamentals</div>
-    <div class="ch-badge c1">ROUTING</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(37,99,235,.15);">
-    <div class="def-grid">
-      <div class="def"><div class="def-term">Forwarding</div><p>The per-packet, local decision a router makes to move a packet from an input port to an output port. Uses the <strong>routing table</strong> to look up the destination and find the outgoing interface or next-hop router.</p></div>
-      <div class="def"><div class="def-term">Routing</div><p>The process of <strong>building and maintaining the routing table</strong>. A global, network-wide process performed by routing protocols. Routing determines what path packets should take through the network.</p></div>
-    </div>
-
-    <h2 class="sec" style="color:#1d4ed8">Routing Table Methods</h2>
-    <div class="tbl-wrap"><table>
-      <tr><th>Method</th><th>What It Does</th><th>Why Better</th></tr>
-      <tr><td><strong>Next-hop method</strong></td><td>Store only the IP of the NEXT router, not the full path</td><td>Smaller table; full path can change without updating this router's table</td></tr>
-      <tr><td><strong>Network-specific</strong></td><td>One entry per destination network, not per host</td><td>Table size = number of networks, not number of hosts (hugely smaller)</td></tr>
-      <tr><td><strong>Default route</strong></td><td>Catch-all entry (0.0.0.0/0) — used when no specific match found</td><td>Handles traffic to unknown destinations without needing an entry for every possible IP</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#1d4ed8">LPM — Longest Prefix Match</h2>
-    <div class="def"><div class="def-term">Longest Prefix Match</div><p>When a routing table has <strong>multiple matching entries</strong> for a destination IP, the router uses the entry with the <strong>longest subnet mask</strong> (most specific match). A /28 is preferred over /24 because it narrows down the destination more precisely.</p></div>
-
-    <h2 class="sec" style="color:#1d4ed8">Autonomous System (AS)</h2>
-    <div class="def"><div class="def-term">Autonomous System</div><p>A large network or collection of networks under a <strong>single administrative domain</strong> with a unified routing policy. Examples: ISPs, universities, large corporations. Each AS gets an AS number (ASN).</p></div>
-    <div class="tbl-wrap"><table>
-      <tr><th>Category</th><th>Protocol</th><th>Scope</th></tr>
-      <tr><td><strong>Intra-AS (IGP)</strong></td><td>RIP (Distance Vector), OSPF (Link State)</td><td>Routing within one organization/AS</td></tr>
-      <tr><td><strong>Inter-AS (EGP)</strong></td><td>BGP (Border Gateway Protocol)</td><td>Routing between different organizations/ASes (the Internet)</td></tr>
-    </table></div>
-
-    <h2 class="sec" style="color:#1d4ed8">Distance Vector Routing (DVR / RIP)</h2>
-    <div class="def"><div class="def-term">Distance Vector Routing</div><p>Each router maintains a <strong>vector (table) of distances</strong> to all destinations and the next hop to use. Routers share their ENTIRE table with DIRECT NEIGHBORS only, periodically (every 30 seconds in RIP). Based on <strong>Bellman-Ford algorithm</strong>.</p></div>
-    <ul class="pts">
-      <li><strong>Formula:</strong> D(x, y) = min over all neighbors v { cost(x→v) + D(v→y) }</li>
-      <li><strong>Initialization:</strong> Each router knows only direct neighbors. Cost to self = 0. Cost to others = ∞.</li>
-      <li><strong>Convergence:</strong> Tables stabilize when no router updates its table after receiving neighbors' tables.</li>
-      <li><strong>Count-to-infinity problem:</strong> When a link fails, bad routing info can loop between two routers, incrementing the count to infinity. Slow to converge.</li>
-      <li><strong>Solution attempts:</strong> Split horizon (don't advertise route back to source), poison reverse (advertise ∞ back).</li>
-    </ul>
-
-    <h2 class="sec" style="color:#1d4ed8">Link State Routing (OSPF)</h2>
-    <div class="def"><div class="def-term">Link State Routing</div><p>Each router <strong>floods Link State Advertisements (LSAs)</strong> to ALL routers in the network. Every router builds a <strong>complete, identical topology map</strong>. Then each router independently runs <strong>Dijkstra's SPF algorithm</strong> to compute shortest paths.</p></div>
-    <ul class="pts">
-      <li><strong>Neighbor discovery:</strong> Routers use "Hello" packets to detect neighbors.</li>
-      <li><strong>LSA flooding:</strong> Each router's LSA contains its directly connected links and their costs.</li>
-      <li><strong>Link-State Database (LSDB):</strong> Complete topology of the network, synchronized across all routers.</li>
-      <li><strong>Dijkstra's SPF:</strong> Finds the shortest path tree from this router to every other router.</li>
-    </ul>
-    <div class="tbl-wrap"><table>
-      <tr><th>Feature</th><th>Distance Vector (RIP)</th><th>Link State (OSPF)</th></tr>
-      <tr><td><strong>Algorithm</strong></td><td>Bellman-Ford</td><td>Dijkstra SPF</td></tr>
-      <tr><td><strong>Knowledge</strong></td><td>Neighbors only</td><td>Entire network topology</td></tr>
-      <tr><td><strong>Updates sent to</strong></td><td>Direct neighbors only</td><td>All routers (flooded)</td></tr>
-      <tr><td><strong>What's sent</strong></td><td>Entire routing table</td><td>LSAs (just link info)</td></tr>
-      <tr><td><strong>Convergence speed</strong></td><td>Slow</td><td>Fast</td></tr>
-      <tr><td><strong>Routing loops</strong></td><td>Possible (count-to-infinity)</td><td>None</td></tr>
-      <tr><td><strong>CPU/memory</strong></td><td>Low</td><td>Higher</td></tr>
-      <tr><td><strong>Max hops (RIP)</strong></td><td>15 (16 = unreachable)</td><td>No limit</td></tr>
-    </table></div>
-  </div>
-</div>
-
-<!-- ════════════════════ CH 14 — NUMERICALS ════════════════════ -->
-<div class="sdiv">NUMERICAL PROBLEMS — COMPLETE PRACTICE SET</div>
-<div class="chapter open" id="ch14">
-  <div class="ch-head" style="background:rgba(217,119,6,.07);border-color:rgba(217,119,6,.3);" onclick="tog(this)">
-    <div class="ch-icon">🔢</div>
-    <div class="ch-title">Chapter 14 — All Numerical Types with Solutions</div>
-    <div class="ch-badge c4">NUMERICALS</div>
-    <div class="ch-arrow">▼</div>
-  </div>
-  <div class="ch-body" style="border-color:rgba(217,119,6,.18);">
-
-    <h2 class="sec" style="color:#b45309">▸ CRC Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">C1</div><div class="pq">Dataword = <strong>1101011011</strong>, Generator = <strong>10011</strong>. Find CRC and transmitted frame.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>r = len(10011)−1 = 4.</strong> Append 4 zeros → M' = 11010110110000</span></div>
-        <div class="cb">11010110110000 ÷ 10011<br>⊕ 10011 → 1001110110000<br>⊕ &nbsp;&nbsp;10011 → 000000 → skip → 10110000<br>⊕ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10011 → 0101000 → 101000<br>⊕ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10011 → <span class="hi">01011 → Remainder = 1011</span></div>
-        <div class="ans-box"><div class="al">Answer</div>CRC = 1011 &nbsp;|&nbsp; Transmitted = 11010110111011</div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">C2</div><div class="pq">Dataword = <strong>101100</strong>, Generator = <strong>1011</strong>. Find CRC.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>r=3.</strong> M' = 101100000</span></div>
-        <div class="cb">101100000 ÷ 1011<br>⊕ 1011 → 0001 → skip → 100000<br>⊕ 1011 → 011100 → 11100<br>⊕ 1011 → 01110 → 1110<br>⊕ 1011 → <span class="hi">0101 → Remainder = 101</span> (pad to 3 bits)</div>
-        <div class="ans-box"><div class="al">Answer</div>CRC = 101 &nbsp;|&nbsp; Transmitted = 101100101</div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ Hamming Distance Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">H1</div><div class="pq">Find d(10101, 11110) and d(000, 011). Find d_min for {00000, 01011, 10101, 11110}.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>d(10101, 11110):</strong> XOR = 01011 → three 1s → <strong>d = 3</strong></span></div>
-        <div class="step"><span><strong>d(000, 011):</strong> XOR = 011 → two 1s → <strong>d = 2</strong></span></div>
-        <div class="step"><span>All pairs of {00000,01011,10101,11110}: d values = 3,3,4,4,3,3. Minimum = <strong>d_min = 3</strong></span></div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">H2</div><div class="pq">d_min = 4. Max errors detectable? Max errors correctable?</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>Detection: s ≤ d_min − 1 = 4−1 = 3.</strong> Can detect up to 3 errors.</span></div>
-        <div class="step"><span><strong>Correction: t ≤ (d_min−1)/2 = 3/2 = 1.5 → t=1.</strong> Can correct only 1 error.</span></div>
-        <div class="ans-box"><div class="al">Answer</div>Detect up to 3 | Correct up to 1 (d_min=4 wastes capability — use odd d_min for correction)</div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ Stop-and-Wait Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">SW1</div><div class="pq">Bandwidth = <strong>1.5 Mbps</strong>, RTT = <strong>45 ms</strong>, Packet size = <strong>1 KB</strong>. Find efficiency.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>Tt = L/B = (1×1024×8) / (1.5×10⁶) = 8192/1500000 = 5.461 ms</strong></span></div>
-        <div class="step"><span><strong>Tp = RTT/2 = 45/2 = 22.5 ms</strong></span></div>
-        <div class="step"><span><strong>a = Tp/Tt = 22.5/5.461 = 4.12</strong></span></div>
-        <div class="step"><span><strong>η = 1/(1+2×4.12) = 1/9.24 = 0.108 = 10.8%</strong></span></div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">SW2</div><div class="pq">Bit rate = <strong>4 Kbps</strong>, Propagation delay = <strong>20 ms</strong>. Find minimum packet size for ≥20% efficiency.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>η ≥ 0.2 → 1/(1+2a) ≥ 1/5 → 1+2a ≤ 5 → a ≤ 2</strong></span></div>
-        <div class="step"><span><strong>a = Tp/Tt ≤ 2 → 0.020 ≤ 2×(L/4000) → L ≥ 40 bits</strong></span></div>
-        <div class="ans-box"><div class="al">Answer</div>Minimum packet size = 40 bits = 5 bytes</div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ Go-Back-N & Selective Repeat Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">GBN1</div><div class="pq">20 Kbps satellite, propagation delay = <strong>400 ms</strong>, GBN N=10, frame = <strong>100 bytes</strong>. Find efficiency and throughput.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>Tt = (100×8)/20000 = 800/20000 = 0.04 s = 40 ms</strong></span></div>
-        <div class="step"><span><strong>a = 400/40 = 10</strong></span></div>
-        <div class="step"><span><strong>η = N/(1+2a) = 10/(1+20) = 10/21 ≈ 47.6%</strong></span></div>
-        <div class="step"><span><strong>Throughput = 0.476 × 20 Kbps = 9.52 Kbps ≈ 10 Kbps</strong></span></div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">GBN2</div><div class="pq">3-bit sequence number field. What is max window size for GBN and SR?</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>n=3 → 2³=8 sequence numbers (0 to 7)</strong></span></div>
-        <div class="step"><span><strong>GBN max window = 2ⁿ−1 = 8−1 = 7</strong></span></div>
-        <div class="step"><span><strong>SR max window = 2^(n-1) = 2² = 4</strong></span></div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ IPv4 Header Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">IP1</div><div class="pq">First 8 bits = <strong>01000010</strong>. Why is packet discarded?</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="cb">01000010 → split: <span class="eq">0100</span> | <span class="hi">0010</span><br>Version = 0100 = 4 ✓<br>HLEN = 0010 = 2 → Header = 2×4 = <span class="hi">8 bytes</span><br>Minimum header = 20 bytes. 8 &lt; 20 → <span class="hi">INVALID → DISCARDED</span></div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">IP2</div><div class="pq">Hex: <strong>0x45000028 00010000 0102...</strong> — hops remaining? Upper-layer protocol?</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="cb">45=Version4,HLEN5 | 00=TOS | 0028=TotalLength40<br>0001=Identification | 0000=Flags+Offset<br><span class="hi">01 → TTL = 1</span> (1 hop remaining)<br><span class="hi">02 → Protocol = 2 = IGMP</span></div>
-        <div class="ans-box"><div class="al">Answer</div>TTL=1 → can travel 1 more hop. Protocol=2=IGMP.</div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">IP3</div><div class="pq">HLEN = <strong>1000</strong> (binary). How many bytes of options? HLEN=5, Total Length=0x0028 — how many bytes of data?</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>HLEN=1000₂=8 → Header=8×4=32 bytes. Options=32−20=12 bytes</strong></span></div>
-        <div class="step"><span><strong>HLEN=5 → Header=20 bytes. 0x0028=40 bytes total. Data=40−20=20 bytes</strong></span></div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ Fragmentation Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">FR1</div><div class="pq"><strong>1440-byte packet</strong>, MTU = <strong>576</strong>, header = 20 bytes. Find fragments, MF, total length, offset.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>Data = 1440−20 = 1420 bytes. Max data/fragment = 576−20 = 556 → round down to multiple of 8 → 552 bytes</strong></span></div>
-        <div class="step"><span><strong>Fragments = ⌈1420/552⌉ = ⌈2.57⌉ = 3</strong></span></div>
-        <div class="tbl-wrap"><table><tr><th>Fragment</th><th>Data</th><th>Total Length</th><th>Offset</th><th>MF</th></tr><tr><td>1</td><td>552</td><td>572</td><td>0</td><td>1</td></tr><tr><td>2</td><td>552</td><td>572</td><td>552/8=69</td><td>1</td></tr><tr><td>3</td><td>316</td><td>336</td><td>1104/8=138</td><td>0</td></tr></table></div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">FR2</div><div class="pq"><strong>4404-byte packet</strong>, MTU = <strong>1500</strong>, header = 20. Find 3rd fragment's MF, total length, offset.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>Data=4404−20=4384. Max/frag=1500−20=1480. Frags=⌈4384/1480⌉=3</strong></span></div>
-        <div class="tbl-wrap"><table><tr><th>Fragment</th><th>Byte Range</th><th>Offset</th><th>MF</th><th>Total Length</th></tr><tr><td>1</td><td>0–1479</td><td>0</td><td>1</td><td>1500</td></tr><tr><td>2</td><td>1480–2959</td><td>1480/8=185</td><td>1</td><td>1500</td></tr><tr><td><strong>3</strong></td><td>2960–4383</td><td>2960/8=<strong>370</strong></td><td><strong>0</strong></td><td><strong>1444</strong></td></tr></table></div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ Subnetting Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">SN1</div><div class="pq">IP = <strong>205.16.37.39/28</strong>. Find: mask, network, broadcast, total addresses, usable hosts.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>/28 → host bits=4. Mask=255.255.255.240</strong></span></div>
-        <div class="step"><span><strong>39=00100111. Last 4 bits→0: 00100000=32 → Network: 205.16.37.32</strong></span></div>
-        <div class="step"><span><strong>Last 4 bits→1: 00101111=47 → Broadcast: 205.16.37.47</strong></span></div>
-        <div class="step"><span><strong>Total=2⁴=16. Usable=14. Host range: .33 to .46</strong></span></div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">SN2</div><div class="pq">IP = <strong>192.168.10.65/26</strong>. Find all subnet details.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>/26 → host bits=6. Mask=255.255.255.192</strong></span></div>
-        <div class="step"><span><strong>65=01000001. Top 2 bits=01, set last 6 to 0 → 01000000=64 → Network: 192.168.10.64</strong></span></div>
-        <div class="step"><span><strong>Set last 6 to 1 → 01111111=127 → Broadcast: 192.168.10.127</strong></span></div>
-        <div class="step"><span><strong>Usable: .65 to .126. Total=64. Usable hosts=62.</strong></span></div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ Baud Rate / Nyquist / Shannon Numericals</h2>
-    <div class="prob open">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">BR1</div><div class="pq">B = <strong>3000 Hz</strong>, SNR = <strong>3162</strong>, L = <strong>8 levels</strong>. Find Nyquist and Shannon capacity.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>Nyquist (L=8, log₂8=3): N=2×3000×3 = 18,000 bps = 18 Kbps</strong></span></div>
-        <div class="step"><span><strong>Shannon: N=3000×log₂(1+3162)=3000×log₂(3163)≈3000×11.63≈34,890 bps≈34.9 Kbps</strong></span></div>
-        <div class="ans-box"><div class="al">Answer</div>Nyquist=18 Kbps | Shannon≈34.9 Kbps | Limiting factor=Nyquist (lower)</div>
-      </div>
-    </div>
-    <div class="prob">
-      <div class="prob-h" onclick="togP(this)"><div class="pnum">BR2</div><div class="pq">Bit rate = <strong>2000 bps</strong>. Find baud rate for NRZ-L (worst case) and Manchester.</div><div class="pbadge bs">SOLVED</div><div class="parr">▼</div></div>
-      <div class="prob-b">
-        <div class="step"><span><strong>NRZ-L: c=1, r=1 → S=cN/r=1×2000/1=2000 baud</strong></span></div>
-        <div class="step"><span><strong>Manchester: c=1, r=1/2 → S=1×2000/(0.5)=4000 baud</strong></span></div>
-      </div>
-    </div>
-
-    <h2 class="sec" style="color:#b45309">▸ All Formulas Reference</h2>
-    <div class="fgrid">
-      <div class="fbox"><div class="fl">Tt (Transmission Delay)</div><div class="fv">L / B</div><div class="fd">L=bits, B=bps</div></div>
-      <div class="fbox"><div class="fl">Tp (Propagation Delay)</div><div class="fv">D / V</div><div class="fd">D=distance, V=speed</div></div>
-      <div class="fbox"><div class="fl">a ratio</div><div class="fv">Tp / Tt</div></div>
-      <div class="fbox"><div class="fl">Stop-and-Wait η</div><div class="fv">1 / (1 + 2a)</div></div>
-      <div class="fbox"><div class="fl">GBN / SR η</div><div class="fv">N / (1 + 2a)</div></div>
-      <div class="fbox"><div class="fl">Throughput</div><div class="fv">η × Bandwidth</div></div>
-      <div class="fbox"><div class="fl">SR window</div><div class="fv">N = 2^(n-1)</div></div>
-      <div class="fbox"><div class="fl">GBN seq nums</div><div class="fv">N + 1</div></div>
-      <div class="fbox"><div class="fl">SR seq nums</div><div class="fv">2N</div></div>
-      <div class="fbox"><div class="fl">IPv4 addresses</div><div class="fv">2^(32−n)</div></div>
-      <div class="fbox"><div class="fl">Usable hosts</div><div class="fv">2^(32−n) − 2</div></div>
-      <div class="fbox"><div class="fl">Header size</div><div class="fv">HLEN × 4</div></div>
-      <div class="fbox"><div class="fl">Data bytes</div><div class="fv">Total Len − Header</div></div>
-      <div class="fbox"><div class="fl">Fragment offset</div><div class="fv">byte_pos / 8</div></div>
-      <div class="fbox"><div class="fl">Fragments count</div><div class="fv">⌈ data / (MTU−20) ⌉</div></div>
-      <div class="fbox"><div class="fl">Nyquist</div><div class="fv">2B × log₂(L)</div></div>
-      <div class="fbox"><div class="fl">Shannon</div><div class="fv">B × log₂(1+SNR)</div></div>
-      <div class="fbox"><div class="fl">Baud rate</div><div class="fv">S = cN / r</div></div>
-      <div class="fbox"><div class="fl">Detect s errors</div><div class="fv">d_min ≥ s + 1</div></div>
-      <div class="fbox"><div class="fl">Correct t errors</div><div class="fv">d_min ≥ 2t + 1</div></div>
-      <div class="fbox"><div class="fl">Block coding</div><div class="fv">n = k + r</div></div>
-      <div class="fbox"><div class="fl">CRC bits</div><div class="fv">len(generator) − 1</div></div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /wrap -->
+<footer>
+  <strong>Computer Networks — Course Syllabus</strong> &nbsp;·&nbsp; Bennett University, Greater Noida &nbsp;·&nbsp; School of Computer Science Engineering and Technology &nbsp;·&nbsp; Exam: March 26, 2026 · 10:30 AM
+</footer>
 
 <script>
-// ── Toggle chapter ──
-function tog(head){
-  const c=head.parentElement;
-  c.classList.toggle('open');
-}
-// ── Toggle problem ──
-function togP(head){
-  const c=head.parentElement;
-  c.classList.toggle('open');
-}
-
-// ── Countdown Timer ──
 (function(){
   const exam = new Date('2026-03-26T10:30:00');
-  const w = document.getElementById('timer-widget');
   function pad(n){return String(n).padStart(2,'0');}
   function tick(){
-    const now=new Date();
-    let diff=exam-now;
-    if(diff<=0){
-      document.getElementById('td').textContent='00';
-      document.getElementById('th').textContent='00';
-      document.getElementById('tm').textContent='00';
-      document.getElementById('ts').textContent='00';
-      document.querySelector('.timer-bottom').innerHTML='<span>EXAM TIME!</span>';
-      w.classList.add('urgent','very-urgent');
+    const now = new Date();
+    let diff = exam - now;
+    if(diff <= 0){
+      ['td','th','tm','ts'].forEach(id => document.getElementById(id).textContent = '00');
       return;
     }
-    const d=Math.floor(diff/86400000); diff-=d*86400000;
-    const h=Math.floor(diff/3600000); diff-=h*3600000;
-    const m=Math.floor(diff/60000); diff-=m*60000;
-    const s=Math.floor(diff/1000);
-    document.getElementById('td').textContent=pad(d);
-    document.getElementById('th').textContent=pad(h);
-    document.getElementById('tm').textContent=pad(m);
-    document.getElementById('ts').textContent=pad(s);
-    if(d===0&&h<3){w.classList.add('urgent');}
-    if(d===0&&h<1){w.classList.add('very-urgent');}
+    const d = Math.floor(diff/86400000); diff -= d*86400000;
+    const h = Math.floor(diff/3600000);  diff -= h*3600000;
+    const m = Math.floor(diff/60000);    diff -= m*60000;
+    const s = Math.floor(diff/1000);
+    document.getElementById('td').textContent = pad(d);
+    document.getElementById('th').textContent = pad(h);
+    document.getElementById('tm').textContent = pad(m);
+    document.getElementById('ts').textContent = pad(s);
   }
   tick();
-  setInterval(tick,1000);
+  setInterval(tick, 1000);
 })();
-
-// Open all concept prob cards on load
-document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelectorAll('.prob').forEach(p=>{
-    const b=p.querySelector('.pbadge');
-    if(b&&b.classList.contains('bs'))p.classList.add('open');
-  });
-});
 </script>
 </body>
 </html>
